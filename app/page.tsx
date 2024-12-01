@@ -1,4 +1,5 @@
 import Image from "next/image";
+import env from "@/env";
 
 export default function Home() {
   return (

@@ -11,12 +11,15 @@
     "drizzle:generate": "drizzle-kit generate --config=drizzle.config.ts"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "^0.11.1",
+    "better-auth": "^1.0.7",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.4",
     "next": "15.0.3",
     "postgres": "^3.4.5",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
