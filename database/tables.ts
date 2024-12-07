@@ -1,5 +1,19 @@
-import { testTable } from "./schema/users-workspaces";
+import {
+  accounts,
+  sessions,
+  users,
+  verifications,
+  organizations,
+  members,
+  invitations,
+} from "./schema/auth";
 
 export {
-  testTable
-}
+  accounts,
+  sessions,
+  users,
+  verifications,
+  organizations,
+  members,
+  invitations,
+};
