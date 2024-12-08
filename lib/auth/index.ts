@@ -1,13 +1,12 @@
 import { betterAuth } from "better-auth";
-import {
-  magicLink,
-  organization,
-} from "better-auth/plugins";
+import { magicLink, organization } from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import * as tables from "@/database/tables";
 // import * as relations from "@/database/relations";
 import env from "env";
 import { db } from "@/database";
+import { sendMagicLink } from "@/emails/magic-link";
+import { toast } from "sonner";
 
 export const auth = betterAuth({
   appName: env.NEXT_PUBLIC_APP_NAME,
@@ -40,8 +39,8 @@ export const auth = betterAuth({
       },
     }),
     magicLink({
-      sendMagicLink: async ({ email, token, url }, request) => {
-        console.log(email, token, url);
+      sendMagicLink: async ({ email, url }, request) => {
+        await sendMagicLink(email, url);
       },
     }),
   ],

@@ -7,7 +7,10 @@ import { ViewTransitions } from "next-view-transitions";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Startstack",
+  title: {
+    default: "Startstack",
+    template: "%s | Startstack",
+  }
 };
 
 export default function RootLayout({
