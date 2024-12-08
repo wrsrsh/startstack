@@ -1,13 +1,19 @@
 import React from "react";
-import { LogoutButton } from "./_components/logout-button";
 import { PageTitle } from "@/components/page-title";
+import { Metadata } from "next";
 
-function HomeRoute() {
+export const metadata: Metadata = {
+  title: {
+    default: "Home",
+    template: "%s | Home",
+  },
+};
+
+export default function HomeRoute() {
   return (
     <section>
+      
       <PageTitle selfLabel="Home" />
     </section>
   );
 }
-
-export default HomeRoute;

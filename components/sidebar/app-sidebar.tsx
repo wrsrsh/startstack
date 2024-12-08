@@ -64,16 +64,15 @@ const data = {
 };
 
 export function AppSidebar() {
-  const [activeTeam, setActiveTeam] = React.useState(data.teams[0]);
-
   const router = useRouter();
   const [loggingOut, setLoggingOut] = React.useState(false);
   const pathName = usePathname();
 
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <WorkspaceSwitcher teams={data.teams as Partial<Organization>[]} />
+        <WorkspaceSwitcher />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

@@ -61,7 +61,7 @@ export function LoginForm() {
         callbackURL: "/app/home",
       });
       if (error) {
-        toast.error(error.message);
+          toast.error(error.message);
         return;
       }
       router.push("/login/sent");

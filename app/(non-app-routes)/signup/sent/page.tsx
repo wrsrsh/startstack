@@ -1,16 +1,23 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { auth } from "@/lib/auth";
 import { CheckCircle } from "lucide-react";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export const metadata: Metadata = {
   title: "Sign Up Link Sent",
 };
 
-export default function MagicLinkSent() {
+export default async function MagicLinkSent() {
+    const res = await auth.api.getSession({
+      headers: await headers(),
+    });
+    if (res?.session) return redirect("/app/home");
   return (
-        <main className="flex flex-col items-center justify-center min-h-screen bg-orange-50/40">
+    <main className="flex flex-col items-center justify-center min-h-screen">
       <Card className="min-w-md max-w-md">
         <div className="px-4">
           <CardHeader className="flex flex-col items-center space-y-2">
@@ -37,6 +44,6 @@ export default function MagicLinkSent() {
           </CardContent>
         </div>
       </Card>
-      </main> 
+    </main>
   );
 }

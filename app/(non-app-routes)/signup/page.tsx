@@ -1,16 +1,26 @@
-import React from "react";
-import { SignupForm } from "./_components/signup-form";
+import React, { Suspense } from "react";
+import { SignupForm } from "@/components/forms/signup-form";
 import { Metadata } from "next";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import Loading from "@/app/loading";
 
 export const metadata: Metadata = {
   title: "Sign Up",
   description: "Create an account",
 }
 
-export default function SignUpPage() {
+export default async function SignUpPage() {
+    const res = await auth.api.getSession({
+      headers: await headers(),
+    });
+    if (res?.session) return redirect("/app/home");
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-orange-50/40">
-      <SignupForm />
+    <main className="flex flex-col items-center justify-center min-h-screen">
+      <Suspense fallback={<Loading />}>
+        <SignupForm />
+      </Suspense>
     </main>
   );
 }
