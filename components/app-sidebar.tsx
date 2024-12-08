@@ -22,6 +22,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { WorkspaceSwitcher } from "./workspace-switcher";
 import { signOut } from "@/lib/auth/client";
 import { toast } from "sonner";
+import { Organization } from "@/types/auth";
 
 // Simplified data
 const data = {
@@ -72,7 +73,7 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <WorkspaceSwitcher teams={data.teams as any} />
+        <WorkspaceSwitcher teams={data.teams as Partial<Organization>[]} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

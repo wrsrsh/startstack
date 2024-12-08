@@ -17,7 +17,7 @@ import {
 import { Organization } from "@/types/auth";
 
 interface WorkspaceSwitcherProps {
-  teams: Organization[];
+  teams: Partial<Organization>[];
 }
 
 export function WorkspaceSwitcher({ teams }: WorkspaceSwitcherProps) {
