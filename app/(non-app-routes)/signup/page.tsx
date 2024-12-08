@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 }
 
 export default async function SignUpPage() {
-    const res = await auth.api.getSession({
-      headers: await headers(),
-    });
-    if (res?.session) return redirect("/app/home");
+    // const res = await auth.api.getSession({
+    //   headers: await headers(),
+    // });
+    // if (res?.session) return redirect("/app/home");
   return (
     <main className="flex flex-col items-center justify-center min-h-screen">
       <Suspense fallback={<Loading />}>

@@ -11,6 +11,13 @@ import { toast } from "sonner";
 export const auth = betterAuth({
   appName: env.NEXT_PUBLIC_APP_NAME,
   baseURL: env.NEXT_PUBLIC_APP_URL,
+  session: {
+    expiresIn: 60 * 60 * 24 * 30, // 30 days
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60 
+    }
+  },
   socialProviders: {
     google: {
       clientId: env.GOOGLE_CLIENT_ID as string,
