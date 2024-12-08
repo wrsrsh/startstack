@@ -3,7 +3,8 @@ import { z } from "zod";
 
 const env = createEnv({
   server: {
-    DATABASE_URL: z.string().url(),
+    DATABASE_URL_DEVELOPMENT: z.string(),
+    DATABASE_URL_PRODUCTION: z.string(),
     GOOGLE_CLIENT_ID: z.string().optional(),
     GOOGLE_CLIENT_SECRET: z.string().optional(),
     GITHUB_CLIENT_ID: z.string().optional(),
@@ -15,7 +16,8 @@ const env = createEnv({
     NEXT_PUBLIC_APP_URL: z.string(),
   },
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_URL_DEVELOPMENT: process.env.DATABASE_URL_DEVELOPMENT,
+    DATABASE_URL_PRODUCTION: process.env.DATABASE_URL_PRODUCTION,
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,

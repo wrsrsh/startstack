@@ -7,8 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "drizzle:migrate": "drizzle-kit migrate --config=drizzle.config.ts",
-    "drizzle:generate": "drizzle-kit generate --config=drizzle.config.ts"
+    "drizzle:migrate:dev": "drizzle-kit migrate --config=database/config.dev.ts",
+    "drizzle:generate:dev": "drizzle-kit generate --config=database/config.dev.ts",
+    "drizzle:migrate:prod": "drizzle-kit migrate --config=database/config.prod.ts",
+    "drizzle:generate:prod": "drizzle-kit generate --config=database/config.prod.ts"
   },
   "dependencies": {
     "@better-fetch/fetch": "^1.1.12",

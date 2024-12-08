@@ -40,7 +40,7 @@ yarn-error.log*
 .vercel
 
 # database
-/drizzle
+/database/migrations
 
 # typescript
 *.tsbuildinfo
