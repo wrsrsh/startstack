@@ -12,7 +12,7 @@ const DEFAULT_EMAIL = "noreply@ascendifyr.in";
 export async function sendEmail(
   email: string,
   subject: string,
-  body: ReactNode
+  body: ReactNode,
 ) {
   const { error } = await resend.emails.send({
     from: `${DEFAULT_SENDER_NAME} <${DEFAULT_EMAIL}>`,

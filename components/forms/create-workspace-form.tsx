@@ -54,7 +54,7 @@ export function CreateWorkspaceForm() {
       router.push("/app/home");
     } catch (error) {
       toast.error(
-        "Something went wrong. Contact support if the issue persists"
+        "Something went wrong. Contact support if the issue persists",
       );
     } finally {
       setLoading(false);
@@ -75,7 +75,7 @@ export function CreateWorkspaceForm() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-3 grid"
+              className="grid space-y-3"
             >
               <FormField
                 control={form.control}
@@ -114,7 +114,7 @@ export function CreateWorkspaceForm() {
               <Button type="submit" disabled={loading}>
                 {loading ? (
                   <span className="flex items-center gap-2">
-                    <Loader2 className="animate-spin size-4" />
+                    <Loader2 className="size-4 animate-spin" />
                   </span>
                 ) : (
                   <>

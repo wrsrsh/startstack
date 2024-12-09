@@ -11,10 +11,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname } from "next/navigation";
 
-export function ModeToggle({className}: {className?: string}) {
+export function ModeToggle({ className }: { className?: string }) {
   const { setTheme } = useTheme();
+  const pathName = usePathname();
+  const disabledPathnamesStart: string[] = ["/app/settings"];
 
+  if (
+    disabledPathnamesStart.some((pathnameStart) =>
+      pathName.startsWith(pathnameStart),
+    )
+  ) {
+    return null;
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={className}>

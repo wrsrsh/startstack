@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
         //get the cookie from the request
         cookie: request.headers.get("cookie") || "",
       },
-    }
+    },
   );
 
   if (!session) {

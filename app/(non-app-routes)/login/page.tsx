@@ -17,7 +17,7 @@ export default async function SignUpPage() {
   // });
   // if (res?.session) return redirect("/app/home");
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="flex min-h-screen flex-col items-center justify-center">
       <Suspense fallback={<Loading />}>
         <LoginForm />
       </Suspense>

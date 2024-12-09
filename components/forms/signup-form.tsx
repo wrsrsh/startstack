@@ -33,7 +33,6 @@ export function SignupForm() {
   const [googleLoading, setGoogleLoading] = useState(false);
   const [magicLinkLoading, setMagicLinkLoading] = useState(false);
 
-
   const loading = githubLoading || googleLoading || magicLinkLoading;
 
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -69,7 +68,7 @@ export function SignupForm() {
       // await updateUser({name: data.fullName});
     } catch (error) {
       toast.error(
-        "Something went wrong. Contact support if the issue persists"
+        "Something went wrong. Contact support if the issue persists",
       );
     } finally {
       setMagicLinkLoading(false);
@@ -85,7 +84,7 @@ export function SignupForm() {
       });
     } catch (error) {
       toast.error(
-        "Something went wrong. Contact support if the issue persists"
+        "Something went wrong. Contact support if the issue persists",
       );
     }
   };
@@ -99,7 +98,7 @@ export function SignupForm() {
       });
     } catch (error) {
       toast.error(
-        "Something went wrong. Contact support if the issue persists"
+        "Something went wrong. Contact support if the issue persists",
       );
     }
   };
@@ -112,11 +111,11 @@ export function SignupForm() {
           Just give us a name and an email to get started.
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex items-center flex-col">
+      <CardContent className="flex flex-col items-center">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-3 grid w-full"
+            className="grid w-full space-y-3"
           >
             {/* <Button
                     type="button"
@@ -155,7 +154,7 @@ export function SignupForm() {
             >
               {githubLoading ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 className="animate-spin size-4" />
+                  <Loader2 className="size-4 animate-spin" />
                 </span>
               ) : (
                 <>
@@ -216,7 +215,7 @@ export function SignupForm() {
             <Button type="submit" disabled={loading}>
               {magicLinkLoading ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 className="animate-spin size-4" />
+                  <Loader2 className="size-4 animate-spin" />
                 </span>
               ) : (
                 <>
@@ -226,10 +225,10 @@ export function SignupForm() {
                 </>
               )}
             </Button>
-            <p className="text-sm text-center text-muted-foreground pt-1">
+            <p className="pt-1 text-center text-sm text-muted-foreground">
               Already have an account?{" "}
               <span
-                className="font-medium hover:underline underline-offset-4 cursor-pointer hover:text-primary"
+                className="cursor-pointer font-medium underline-offset-4 hover:text-primary hover:underline"
                 onClick={() => router.push("/login")}
               >
                 Login
@@ -237,13 +236,13 @@ export function SignupForm() {
             </p>
           </form>
         </Form>
-        <p className="text-xs text-center text-muted-foreground/50 pt-3 max-w-64">
+        <p className="max-w-64 pt-3 text-center text-xs text-muted-foreground/50">
           By signing up, you agree to our{" "}
-          <span className="font-medium hover:underline underline-offset-4 cursor-pointer hover:text-primary">
+          <span className="cursor-pointer font-medium underline-offset-4 hover:text-primary hover:underline">
             Terms of Service
           </span>{" "}
           and{" "}
-          <span className="font-medium hover:underline underline-offset-4 cursor-pointer hover:text-primary">
+          <span className="cursor-pointer font-medium underline-offset-4 hover:text-primary hover:underline">
             Privacy Policy
           </span>
           .

@@ -33,7 +33,6 @@ export function LoginForm() {
   const [googleLoading, setGoogleLoading] = useState(false);
   const [magicLinkLoading, setMagicLinkLoading] = useState(false);
 
-
   const loading = githubLoading || googleLoading || magicLinkLoading;
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -61,13 +60,13 @@ export function LoginForm() {
         callbackURL: "/app/home",
       });
       if (error) {
-          toast.error(error.message);
+        toast.error(error.message);
         return;
       }
       router.push("/login/sent");
     } catch (error) {
       toast.error(
-        "Something went wrong. Contact support if the issue persists"
+        "Something went wrong. Contact support if the issue persists",
       );
     } finally {
       setMagicLinkLoading(false);
@@ -83,7 +82,7 @@ export function LoginForm() {
       });
     } catch (error) {
       toast.error(
-        "Something went wrong. Contact support if the issue persists"
+        "Something went wrong. Contact support if the issue persists",
       );
     }
   };
@@ -97,7 +96,7 @@ export function LoginForm() {
       });
     } catch (error) {
       toast.error(
-        "Something went wrong. Contact support if the issue persists"
+        "Something went wrong. Contact support if the issue persists",
       );
     }
   };
@@ -115,7 +114,7 @@ export function LoginForm() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-3 grid"
+              className="grid space-y-3"
             >
               {/* <Button
                     type="button"
@@ -154,7 +153,7 @@ export function LoginForm() {
               >
                 {githubLoading ? (
                   <span className="flex items-center gap-2">
-                    <Loader2 className="animate-spin size-4" />
+                    <Loader2 className="size-4 animate-spin" />
                   </span>
                 ) : (
                   <>
@@ -195,7 +194,7 @@ export function LoginForm() {
               <Button type="submit" disabled={loading}>
                 {magicLinkLoading ? (
                   <span className="flex items-center gap-2">
-                    <Loader2 className="animate-spin size-4" />
+                    <Loader2 className="size-4 animate-spin" />
                   </span>
                 ) : (
                   <>
@@ -205,10 +204,10 @@ export function LoginForm() {
                   </>
                 )}
               </Button>
-              <p className="text-sm text-center text-muted-foreground pt-1">
+              <p className="pt-1 text-center text-sm text-muted-foreground">
                 Dont have an account?{" "}
                 <span
-                  className="font-medium hover:underline underline-offset-4 cursor-pointer hover:text-primary"
+                  className="cursor-pointer font-medium underline-offset-4 hover:text-primary hover:underline"
                   onClick={() => router.push("/signup")}
                 >
                   Sign Up

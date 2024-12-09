@@ -2,27 +2,31 @@
 
 import * as React from "react";
 import {
-  Home, LogOut,
+  Home,
+  LogOut,
   Palette,
   Code,
-  Coffee, Settings,
-  Loader2
+  Coffee,
+  Settings,
+  Loader2,
 } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup, SidebarHeader,
-  SidebarMenu, SidebarMenuButton,
+  SidebarGroup,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail
+  SidebarRail,
 } from "@/components/ui/sidebar";
 import { usePathname, useRouter } from "next/navigation";
 import { WorkspaceSwitcher } from "./workspace-switcher";
 import { signOut } from "@/lib/auth/client";
 import { toast } from "sonner";
-import { Organization } from "@/types/auth";
+import { ActiveOrganization, Organization } from "@/types/auth";
 
 // Simplified data
 const data = {
@@ -41,7 +45,11 @@ const data = {
       title: "Home",
       url: "/app/home",
       icon: Home,
-      isActive: true,
+    },
+    {
+      title: "Settings",
+      url: "/app/settings",
+      icon: Settings,
     },
   ],
   projects: [
@@ -63,16 +71,19 @@ const data = {
   ],
 };
 
-export function AppSidebar() {
+export function AppSidebar({
+  activeOrganization,
+}: {
+  activeOrganization: ActiveOrganization;
+}) {
   const router = useRouter();
   const [loggingOut, setLoggingOut] = React.useState(false);
   const pathName = usePathname();
 
-
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <WorkspaceSwitcher />
+        <WorkspaceSwitcher activeOrganization={activeOrganization} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -92,14 +103,6 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={"/app/settings" === pathName}>
-              <a href={"/app/settings"}>
-                <Settings />
-                <span>Settings</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild

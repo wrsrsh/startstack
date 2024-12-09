@@ -144,7 +144,7 @@ export async function sendMagicLink(email: string, url: string) {
       "Continue with your Email",
       <>
         <MagicLinkEmailBody email={email} url={url} />
-      </>
+      </>,
     );
     return res;
   } catch (error) {

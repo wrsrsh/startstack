@@ -12,15 +12,21 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { Organization } from "@/types/auth";
+import { ActiveOrganization, Organization } from "@/types/auth";
 import { authClient } from "@/lib/auth/client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-export function WorkspaceSwitcher() {
+export function WorkspaceSwitcher({
+  activeOrganization,
+}: {
+  activeOrganization: ActiveOrganization;
+}) {
   const [isLoading, setIsLoading] = React.useState(false);
   const { data: organizations } = authClient.useListOrganizations();
-  const { data: activeOrganization } = authClient.useActiveOrganization();
+
+  const [optimisticOrganization, setOptimisticOrganization] =
+    React.useState(activeOrganization);
 
   const router = useRouter();
 
@@ -39,7 +45,11 @@ export function WorkspaceSwitcher() {
 
   // If no active organization is set and we have organizations, set the first one as active
   React.useEffect(() => {
-    if (!activeOrganization && organizations?.length && organizations?.length > 0) {
+    if (
+      !activeOrganization &&
+      organizations?.length &&
+      organizations?.length > 0
+    ) {
       setActiveOrganization(organizations[0].id);
     }
   }, [activeOrganization, organizations]);
@@ -69,23 +79,23 @@ export function WorkspaceSwitcher() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground !border-none"
+              className="!border-none data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               disabled={isLoading}
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg border bg-background">
-                {activeOrganization.logo ? (
+                {optimisticOrganization.logo ? (
                   <Image
-                    src={activeOrganization.logo}
-                    alt={activeOrganization.name}
+                    src={optimisticOrganization.logo}
+                    alt={optimisticOrganization.name}
                     className="size-4 object-contain"
                   />
                 ) : (
-                  activeOrganization.name?.slice(0, 2).toUpperCase()
+                  optimisticOrganization.name?.slice(0, 2).toUpperCase()
                 )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  {activeOrganization.name}
+                  {optimisticOrganization.name}
                 </span>
                 <span className="truncate text-xs text-muted-foreground">
                   {isLoading ? (
@@ -124,9 +134,12 @@ export function WorkspaceSwitcher() {
                 <div className="font-medium">{org.name}</div>
               </DropdownMenuItem>
             ))}
-            <DropdownMenuItem className="gap-2 p-2" onClick={() => {
-              router.push("/signup/create-workspace");
-            }}>
+            <DropdownMenuItem
+              className="gap-2 p-2"
+              onClick={() => {
+                router.push("/signup/create-workspace");
+              }}
+            >
               <div className="flex size-6 items-center justify-center rounded-md border bg-background">
                 <Plus className="size-4" />
               </div>

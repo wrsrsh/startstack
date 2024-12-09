@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 export default function HomeRoute() {
   return (
     <section>
-      
       <PageTitle selfLabel="Home" />
     </section>
   );

@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { AppSidebar } from "@/components/sidebar/c";
 import { PageTitle } from "@/components/page-title";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import Loading from "@/app/loading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SIDEBAR_WIDTH, SIDEBAR_WIDTH_MOBILE } from "@/components/ui/sidebar";
+import { ActiveOrganization } from "@/types/auth";
 
 export default async function AppLayout({
   children,
@@ -21,6 +22,9 @@ export default async function AppLayout({
   if (data.length === 0 || !data) {
     redirect("/signup/create-workspace");
   }
+  const activeOrganization = await auth.api.getFullOrganization({
+    headers: await headers(),
+  });
 
   return (
     <SidebarProvider>
@@ -31,7 +35,9 @@ export default async function AppLayout({
           />
         }
       >
-        <AppSidebar />
+        <AppSidebar
+          activeOrganization={activeOrganization as ActiveOrganization}
+        />
       </Suspense>
       <Suspense fallback={<Loading />}>
         <SidebarInset>{children}</SidebarInset>

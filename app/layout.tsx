@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: {
     default: "Startstack",
     template: "%s | Startstack",
-  }
+  },
 };
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         {/* <AppPostHogProvider> */}
-        <body >
+        <body className="h-screen bg-orange-50/50 dark:bg-gray-900/10">
           <NuqsAdapter>
             <ThemeProvider
               attribute={"class"}
@@ -30,10 +30,8 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              <main className="h-screen bg-orange-50/50 dark:bg-orange-900/5">
-                {children}
-              </main>
-              <ModeToggle className="absolute top-4 right-4" />
+              {children}
+              <ModeToggle className="absolute right-4 top-4" />
             </ThemeProvider>
           </NuqsAdapter>
           <Toaster position="bottom-right" richColors />

@@ -8,7 +8,7 @@ const NextThemesProvider = dynamic(
   () => import("next-themes").then((e) => e.ThemeProvider),
   {
     ssr: false,
-  }
+  },
 );
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {

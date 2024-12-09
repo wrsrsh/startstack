@@ -7,7 +7,7 @@ import postgres from "postgres";
 const sql = postgres(
   process.env.NODE_ENV === "development"
     ? env.DATABASE_URL_DEVELOPMENT
-    : env.DATABASE_URL_PRODUCTION
+    : env.DATABASE_URL_PRODUCTION,
 );
 
 export const db = drizzle(sql, {

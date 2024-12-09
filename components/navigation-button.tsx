@@ -32,7 +32,7 @@ export function NavigationButton({
         }
       }}
       variant={variant}
-      className={cn("flex gap-1 items-center w-30 py-5", className)}
+      className={cn("w-30 flex items-center gap-1 py-5", className)}
       disabled={loading || disabled}
     >
       {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>{children}</>}

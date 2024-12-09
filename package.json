@@ -10,7 +10,9 @@
     "drizzle:migrate:dev": "drizzle-kit migrate --config=database/config.dev.ts",
     "drizzle:generate:dev": "drizzle-kit generate --config=database/config.dev.ts",
     "drizzle:migrate:prod": "drizzle-kit migrate --config=database/config.prod.ts",
-    "drizzle:generate:prod": "drizzle-kit generate --config=database/config.prod.ts"
+    "drizzle:generate:prod": "drizzle-kit generate --config=database/config.prod.ts",
+    "prettier:check": "prettier --check --ignore-path .gitignore .",
+    "prettier:format": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
     "@better-fetch/fetch": "^1.1.12",
@@ -21,6 +23,7 @@
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
     "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.1",
@@ -33,7 +36,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.37.0",
-    "framer-motion": "^11.13.1",
+    "framer-motion": "12.0.0-alpha.1",
     "lucide-react": "^0.468.0",
     "next": "15.0.4",
     "next-themes": "^0.4.4",
@@ -44,10 +47,12 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-hook-form": "^7.53.2",
+    "react-qr-code": "^2.0.15",
     "resend": "^4.0.1",
     "sonner": "^1.7.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "ua-parser-js": "^2.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -56,10 +61,13 @@
     "@types/react-dom": "^19.0.0",
     "drizzle-kit": "^0.29.1",
     "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-config-next": "15.0.4",
     "postcss": "^8.4.49",
     "react-email": "3.0.3",
     "tailwindcss": "^3.4.16",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "typescript": "^5.7.2"
   }
 }

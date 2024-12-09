@@ -6,5 +6,5 @@ export const loginSchema = z.object({
 
 export const signUpSchema = z.object({
   fullName: z.string().min(2, { message: "Full name is required" }),
-  email: z.string().email({message: "Please enter a valid email address"}),
+  email: z.string().email({ message: "Please enter a valid email address" }),
 });

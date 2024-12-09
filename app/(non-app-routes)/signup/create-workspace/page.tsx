@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function OnboardingPage() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="flex min-h-screen flex-col items-center justify-center">
       <Suspense fallback={<Loading />}>
         {" "}
         <CreateWorkspaceForm />

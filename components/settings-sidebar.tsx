@@ -28,7 +28,7 @@ export function SettingsSidebar() {
   return (
     <Sidebar
       collapsible="none"
-      className="bg-transparent border-sidebar border"
+      className="border border-sidebar bg-transparent"
     >
       <SidebarContent>
         <SidebarGroup>

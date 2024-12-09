@@ -14,6 +14,7 @@ export const users = pgTable("users", {
   image: text("image"),
   createdAt: timestamp("createdAt").notNull(),
   updatedAt: timestamp("updatedAt").notNull(),
+  marketingConsent: boolean("marketingConsent").notNull().default(false),
 });
 
 export const sessions = pgTable("sessions", {

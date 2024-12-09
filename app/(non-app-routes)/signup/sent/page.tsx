@@ -12,31 +12,31 @@ export const metadata: Metadata = {
 };
 
 export default async function MagicLinkSent() {
-    const res = await auth.api.getSession({
-      headers: await headers(),
-    });
-    if (res?.session) return redirect("/app/home");
+  const res = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (res?.session) return redirect("/app/home");
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="flex min-h-screen flex-col items-center justify-center">
       <Card className="min-w-md max-w-md">
         <div className="px-4">
           <CardHeader className="flex flex-col items-center space-y-2">
-            <CheckCircle className="w-12 h-12 text-green-500" />
-            <CardTitle className="text-2xl font-bold text-center">
+            <CheckCircle className="h-12 w-12 text-green-500" />
+            <CardTitle className="text-center text-2xl font-bold">
               Sign Up Link Sent!
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-center space-y-4">
-            <p className="text-muted-foreground text-sm w-96">
+          <CardContent className="space-y-4 text-center">
+            <p className="w-96 text-sm text-muted-foreground">
               We've sent a magic link to your email address, click the continue
               button in the email to signup. If you don't see the email in your
               inbox, check your spam folder.
             </p>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               Still didn't receive the email?{" "}
               <Link
                 href="/signup"
-                className="font-medium hover:underline cursor-pointer underline-offset-4"
+                className="cursor-pointer font-medium underline-offset-4 hover:underline"
               >
                 Try Again
               </Link>
