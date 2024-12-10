@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Create an account",
 };
 
-export default function OnboardingPage() {
+export default function CreateWorkspacePage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
       <Suspense fallback={<Loading />}>

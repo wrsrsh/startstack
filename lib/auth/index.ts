@@ -7,9 +7,10 @@ import env from "env";
 import { db } from "@/database";
 import { sendMagicLink } from "@/emails/magic-link";
 import { toast } from "sonner";
+import { APP_NAME } from "@/constants";
 
 export const auth = betterAuth({
-  appName: env.NEXT_PUBLIC_APP_NAME,
+  appName: APP_NAME,
   baseURL: env.NEXT_PUBLIC_APP_URL,
   session: {
     expiresIn: 60 * 60 * 24 * 30, // 30 days
@@ -36,6 +37,12 @@ export const auth = betterAuth({
     },
     usePlural: true,
   }),
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google", "github"],
+    },
+  },
   plugins: [
     organization({
       sendInvitationEmail: async (
@@ -48,6 +55,8 @@ export const auth = betterAuth({
     magicLink({
       sendMagicLink: async ({ email, url }, request) => {
         await sendMagicLink(email, url);
+        if (process.env.NODE_ENV === "development")
+          console.log("✨ Magic link: " + url);
       },
     }),
   ],

@@ -2,9 +2,10 @@ import { Resend } from "resend";
 
 import env from "@/env";
 import { ReactNode } from "react";
+import { APP_NAME } from "@/constants";
 const resend = new Resend(env.RESEND_API_KEY);
 
-const DEFAULT_SENDER_NAME = env.NEXT_PUBLIC_APP_NAME;
+const DEFAULT_SENDER_NAME = APP_NAME;
 
 // Replace with your email and sender name
 const DEFAULT_EMAIL = "noreply@ascendifyr.in";

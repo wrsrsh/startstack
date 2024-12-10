@@ -80,191 +80,191 @@ export function WorkspacePage(props: {
   );
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Workspace Options</CardTitle>
-        <div className="flex items-center gap-2 pt-4">
-          <Avatar className="rounded-md">
+    <Card className="w-full bg-background shadow-lg">
+      <CardHeader className="pb-6">
+        <CardTitle className="mb-4 text-base">
+          Workspace Options
+        </CardTitle>
+        <div className="flex items-center gap-4">
+          <Avatar className="h-12 w-12 rounded-lg">
             <AvatarImage
-              className="h-full w-full rounded-md object-cover"
+              className="h-full w-full rounded-lg object-cover"
               src={optimisticOrg?.logo || ""}
             />
-            <AvatarFallback className="rounded-none">
-              {optimisticOrg?.name?.charAt(0) || "P"}
+            <AvatarFallback className="rounded-lg text-lg">
+              {optimisticOrg?.name?.slice(0,2).toUpperCase() || "P"}
             </AvatarFallback>
           </Avatar>
           <div>
-            <p>{optimisticOrg?.name || "Personal"}</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-base font-semibold">
+              {optimisticOrg?.name || "Personal"}
+            </p>
+            <p className="text-sm text-muted-foreground">
               {optimisticOrg?.members.length || 1}{" "}
               {optimisticOrg?.members.length === 1 ? "member" : "members"}
             </p>
           </div>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-grow flex-col gap-2">
-            <p className="font-medium">Members</p>
-            <div className="flex flex-col gap-2 pt-1">
-              {optimisticOrg?.members.map((member) => (
-                <div
-                  key={member.id}
-                  className="flex items-center justify-between"
-                >
-                  <div className="flex items-center gap-2">
-                    <Avatar className="h-9 w-9 sm:flex">
-                      <AvatarImage
-                        src={member.user.image || ""}
-                        className="object-cover"
-                      />
-                      <AvatarFallback>
-                        {member.user.name?.charAt(0)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-sm">{member.user.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {member.role}
-                      </p>
-                    </div>
-                  </div>
-                  {member.role !== "owner" &&
-                    (currentMember?.role === "owner" ||
-                      currentMember?.role === "admin") && (
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => {
-                          organization.removeMember({
-                            memberIdOrEmail: member.id,
-                          });
-                        }}
-                      >
-                        {currentMember?.id === member.id ? "Leave" : "Remove"}
-                      </Button>
-                    )}
-                </div>
-              ))}
-              {!optimisticOrg?.id && (
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Avatar>
-                      <AvatarImage src={session?.user.image || ""} />
-                      <AvatarFallback>
-                        {session?.user.name?.charAt(0)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-sm">{session?.user.name}</p>
-                      <p className="text-xs text-muted-foreground">Owner</p>
-                    </div>
+      <CardContent className="space-y-8">
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold">Members</h3>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {optimisticOrg?.members.map((member) => (
+              <div
+                key={member.id}
+                className="flex items-center justify-between rounded-xl border border-input px-4 py-2"
+              >
+                <div className="flex items-center gap-3">
+                  <Avatar className="h-8 w-8 bg-muted-foreground">
+                    <AvatarImage
+                      src={member.user.image || ""}
+                      className="object-cover"
+                    />
+                    <AvatarFallback className="text-base font-medium bg-muted-foreground text-white">
+                      {member.user.name?.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-medium">{member.user.name}</p>
+                    <p className="text-sm capitalize text-muted-foreground">
+                      {member.role}
+                    </p>
                   </div>
                 </div>
-              )}
-            </div>
-          </div>
-          <div className="flex flex-grow flex-col gap-2">
-            <p className="font-medium">Invites</p>
-            <div className="flex flex-col gap-2 pt-1">
-              <AnimatePresence>
-                {optimisticOrg?.invitations
-                  .filter(
-                    (invitation: Invitation) => invitation.status === "pending",
-                  )
-                  .map((invitation: Invitation) => (
-                    <motion.div
-                      key={invitation.id}
-                      className="flex items-center justify-between"
-                      variants={inviteVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="exit"
-                      layout
+                {member.role !== "owner" &&
+                  (currentMember?.role === "owner" ||
+                    currentMember?.role === "admin") && (
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => {
+                        organization.removeMember({
+                          memberIdOrEmail: member.id,
+                        });
+                      }}
                     >
-                      <div>
-                        <p className="text-sm">{invitation.email}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {invitation.role}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Button
-                          disabled={isRevoking.includes(invitation.id)}
-                          size="sm"
-                          variant="destructive"
-                          onClick={() => {
-                            organization.cancelInvitation(
-                              {
-                                invitationId: invitation.id,
-                              },
-                              {
-                                onRequest: () => {
-                                  setIsRevoking([...isRevoking, invitation.id]);
-                                },
-                                onSuccess: () => {
-                                  toast.message(
-                                    "Invitation revoked successfully",
-                                  );
-                                  setIsRevoking(
-                                    isRevoking.filter(
-                                      (id) => id !== invitation.id,
-                                    ),
-                                  );
-                                  setOptimisticOrg({
-                                    ...optimisticOrg,
-                                    invitations:
-                                      optimisticOrg?.invitations.filter(
-                                        (inv) => inv.id !== invitation.id,
-                                      ),
-                                  });
-                                },
-                                onError: (ctx) => {
-                                  toast.error(ctx.error.message);
-                                  setIsRevoking(
-                                    isRevoking.filter(
-                                      (id) => id !== invitation.id,
-                                    ),
-                                  );
-                                },
-                              },
-                            );
-                          }}
-                        >
-                          {isRevoking.includes(invitation.id) ? (
-                            <Loader2 className="animate-spin" size={16} />
-                          ) : (
-                            "Revoke"
-                          )}
-                        </Button>
-                        <div>
-                          <CopyButton
-                            textToCopy={`${window.location.origin}/accept-invitation/${invitation.id}`}
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-              </AnimatePresence>
-              {optimisticOrg?.invitations.length === 0 && (
-                <motion.p
-                  className="text-sm text-muted-foreground"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  No Active Invitations
-                </motion.p>
-              )}
-              {!optimisticOrg?.id && (
-                <Label className="text-xs text-muted-foreground">
-                  You can&apos;t invite members to your personal workspace.
-                </Label>
-              )}
-            </div>
+                      {currentMember?.id === member.id ? "Leave" : "Remove"}
+                    </Button>
+                  )}
+              </div>
+            ))}
+            {!optimisticOrg?.id && (
+              <div className="flex items-center gap-3 rounded-lg bg-muted p-4">
+                <Avatar className="h-10 w-10">
+                  <AvatarImage src={session?.user.image || ""} />
+                  <AvatarFallback className="text-lg font-medium">
+                    {session?.user.name?.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-medium">{session?.user.name}</p>
+                  <p className="text-sm text-muted-foreground">Owner</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-        <div className="flex w-full justify-end">
+        <div className="space-y-4">
+          <h3 className="text-base font-semibold">Invites</h3>
+          <div className="space-y-3">
+            <AnimatePresence>
+              {optimisticOrg?.invitations
+                .filter(
+                  (invitation: Invitation) => invitation.status === "pending",
+                )
+                .map((invitation: Invitation) => (
+                  <motion.div
+                    key={invitation.id}
+                    className="flex items-center justify-between rounded-lg bg-muted px-4 py-3"
+                    variants={inviteVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    layout
+                  >
+                    <div>
+                      <p className="font-medium">{invitation.email}</p>
+                      <p className="text-sm capitalize text-muted-foreground">
+                        {invitation.role}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        disabled={isRevoking.includes(invitation.id)}
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          organization.cancelInvitation(
+                            {
+                              invitationId: invitation.id,
+                            },
+                            {
+                              onRequest: () => {
+                                setIsRevoking([...isRevoking, invitation.id]);
+                              },
+                              onSuccess: () => {
+                                toast.success(
+                                  "Invitation revoked successfully",
+                                );
+                                setIsRevoking(
+                                  isRevoking.filter(
+                                    (id) => id !== invitation.id,
+                                  ),
+                                );
+                                setOptimisticOrg({
+                                  ...optimisticOrg,
+                                  invitations:
+                                    optimisticOrg?.invitations.filter(
+                                      (inv) => inv.id !== invitation.id,
+                                    ),
+                                });
+                              },
+                              onError: (ctx) => {
+                                toast.error(ctx.error.message);
+                                setIsRevoking(
+                                  isRevoking.filter(
+                                    (id) => id !== invitation.id,
+                                  ),
+                                );
+                              },
+                            },
+                          );
+                        }}
+                      >
+                        {isRevoking.includes(invitation.id) ? (
+                          <Loader2 className="animate-spin" size={16} />
+                        ) : (
+                          "Revoke"
+                        )}
+                      </Button>
+                      <div>
+                        <CopyButton
+                          textToCopy={`${window.location.origin}/accept-invitation/${invitation.id}`}
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+            </AnimatePresence>
+            {optimisticOrg?.invitations.length === 0 && (
+              <motion.p
+                className="text-sm text-muted-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                No Active Invitations
+              </motion.p>
+            )}
+            {!optimisticOrg?.id && (
+              <Label className="text-sm text-muted-foreground">
+                You can&apos;t invite members to your personal workspace.
+              </Label>
+            )}
+          </div>
+        </div>
+        <div className="flex justify-end gap-3">
           <div>
             <div>
               {optimisticOrg?.id && (
@@ -275,6 +275,7 @@ export function WorkspacePage(props: {
               )}
             </div>
           </div>
+          <CreateOrganizationDialog />
         </div>
       </CardContent>
     </Card>
@@ -319,49 +320,61 @@ function CreateOrganizationDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" className="w-full gap-2" variant="secondary">
-          <Plus />
+        <Button size="sm" className="gap-2" variant="outline">
+          <Plus className="h-4 w-4" />
           <p>New Organization</p>
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-11/12 sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>New Organization</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl font-semibold">
+            New Organization
+          </DialogTitle>
+          <DialogDescription className="text-muted-foreground">
             Create a new organization to collaborate with your team.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label>Organization Name</Label>
+        <div className="space-y-4 py-4">
+          <div className="space-y-2">
+            <Label htmlFor="org-name">Organization Name</Label>
             <Input
+              id="org-name"
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="w-full"
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <Label>Organization Slug</Label>
+          <div className="space-y-2">
+            <Label htmlFor="org-slug">Organization Slug</Label>
             <Input
+              id="org-slug"
               value={slug}
               onChange={(e) => {
                 setSlug(e.target.value);
                 setIsSlugEdited(true);
               }}
               placeholder="Slug"
+              className="w-full"
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <Label>Logo</Label>
-            <Input type="file" accept="image/*" onChange={handleLogoChange} />
+          <div className="space-y-2">
+            <Label htmlFor="org-logo">Logo</Label>
+            <Input
+              id="org-logo"
+              type="file"
+              accept="image/*"
+              onChange={handleLogoChange}
+              className="w-full"
+            />
             {logo && (
               <div className="mt-2">
                 <Image
                   src={logo}
                   alt="Logo preview"
-                  className="h-16 w-16 object-cover"
-                  width={16}
-                  height={16}
+                  className="h-16 w-16 rounded-lg object-cover"
+                  width={64}
+                  height={64}
                 />
               </div>
             )}
@@ -393,9 +406,10 @@ function CreateOrganizationDialog() {
                 },
               );
             }}
+            className="w-full"
           >
             {loading ? (
-              <Loader2 className="animate-spin" size={16} />
+              <Loader2 size={16} className="mr-2 animate-spin" />
             ) : (
               "Create"
             )}
@@ -419,35 +433,41 @@ function InviteMemberDialog({
   const [loading, setLoading] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <Button
-        size="sm"
-        className="w-full gap-2"
-        variant="secondary"
-        onClick={() => setOpen(true)}
-      >
-        <MailPlus size={16} />
-        <p>Invite Member</p>
-      </Button>
-      <DialogContent className="grid w-11/12 gap-6 sm:max-w-[425px]">
+      <DialogTrigger asChild>
+        <Button
+          size="sm"
+          className="gap-2"
+          variant="default"
+          onClick={() => setOpen(true)}
+        >
+          <MailPlus size={16} />
+          <p>Invite Member</p>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Invite Member</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl font-semibold">
+            Invite Member
+          </DialogTitle>
+          <DialogDescription className="text-muted-foreground">
             Invite a member to your organization.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-4">
-          <div className="grid gap-2">
-            <Label>Email</Label>
+        <div className="space-y-4 py-4">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
             <Input
+              id="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full"
             />
           </div>
-          <div className="grid gap-2">
-            <Label>Role</Label>
+          <div className="space-y-2">
+            <Label htmlFor="role">Role</Label>
             <Select value={role} onValueChange={setRole}>
-              <SelectTrigger>
+              <SelectTrigger id="role" className="w-full">
                 <SelectValue placeholder="Select a role" />
               </SelectTrigger>
               <SelectContent>
@@ -486,8 +506,13 @@ function InviteMemberDialog({
                 error: (error) => error.error.message,
               });
             }}
+            className="w-full"
           >
-            Invite
+            {loading ? (
+              <Loader2 size={16} className="mr-2 animate-spin" />
+            ) : (
+              "Invite"
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>

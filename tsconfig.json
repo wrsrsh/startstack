@@ -23,6 +23,6 @@
       "env": ["./env.js"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/app/home/_components/random-toast.tsx"],
   "exclude": ["node_modules"]
 }

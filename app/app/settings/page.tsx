@@ -7,6 +7,7 @@ import { WorkspacePage } from "./_components/workspace-page";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Loading from "@/app/loading";
 import { AppearancePage } from "./_components/appearance-page";
+import { NotificationPage } from "./_components/notifications-page";
 
 export default async function SettingsPage() {
   const session = await auth.api.getSession({
@@ -26,7 +27,7 @@ export default async function SettingsPage() {
           <TabsTrigger value="account">Account & Security</TabsTrigger>
           <TabsTrigger value="workspace">Workspace Preferences</TabsTrigger>
           <TabsTrigger value="billing">Billing & Plans</TabsTrigger>
-          <TabsTrigger value="integrations">Emails & Notifications</TabsTrigger>
+          <TabsTrigger value="notifications">Emails & Notifications</TabsTrigger>
           <TabsTrigger value="appearance">Appearance</TabsTrigger>
         </TabsList>
         <TabsContent value="account">
@@ -45,6 +46,11 @@ export default async function SettingsPage() {
         <TabsContent value="appearance">
           <Suspense fallback={<Loading />}>
             <AppearancePage />
+          </Suspense>
+        </TabsContent>
+        <TabsContent value="notifications">
+          <Suspense fallback={<Loading />}>
+            <NotificationPage />
           </Suspense>
         </TabsContent>
       </Tabs>

@@ -12,13 +12,11 @@ const env = createEnv({
     GITHUB_CLIENT_SECRET: z.string().optional(),
   },
   client: {
-    NEXT_PUBLIC_APP_NAME: z.string(),
     NEXT_PUBLIC_APP_URL: z.string(),
   },
   runtimeEnv: {
     DATABASE_URL_DEVELOPMENT: process.env.DATABASE_URL_DEVELOPMENT,
     DATABASE_URL_PRODUCTION: process.env.DATABASE_URL_PRODUCTION,
-    NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,

@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   description: "Create an account",
 };
 
-export default async function SignUpPage() {
-  // const res = await auth.api.getSession({
-  //   headers: await headers(),
-  // });
-  // if (res?.session) return redirect("/app/home");
+export default async function LoginPage() {
+  const res = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (res?.session) return redirect("/app/home");
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
       <Suspense fallback={<Loading />}>

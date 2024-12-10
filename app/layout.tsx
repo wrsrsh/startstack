@@ -5,14 +5,18 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ViewTransitions } from "next-view-transitions";
 import { Toaster } from "sonner";
 import { ModeToggle } from "@/components/mode-toggle";
+import { ToasterWithTheme } from "@/components/toaster-with-theme";
+import { createMetadata } from "@/lib/metadata";
+import { APP_NAME } from "@/constants";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: {
-    default: "Startstack",
-    template: "%s | Startstack",
+    template: `%s | ${APP_NAME}`,
+    default: APP_NAME,
   },
-};
-
+  description: "The easiest way to get started with your next project",
+});
+  
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,7 +38,7 @@ export default function RootLayout({
               <ModeToggle className="absolute right-4 top-4" />
             </ThemeProvider>
           </NuqsAdapter>
-          <Toaster position="bottom-right" richColors />
+          <ToasterWithTheme position="bottom-right"/>
         </body>
         {/* </AppPostHogProvider> */}
       </html>

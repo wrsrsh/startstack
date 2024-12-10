@@ -40,6 +40,7 @@ export function WorkspaceSwitcher({
       console.error("Failed to set active organization:", error);
     } finally {
       setIsLoading(false);
+      router.refresh()
     }
   };
 
