@@ -4,39 +4,13 @@ A production-ready free SaaS starter kit built with Next.js, featuring authentic
 
 ## 🚀 Features
 
-### Authentication & Authorization
-- Magic Link authentication powered by better-auth and Resend
-- GitHub OAuth integration
-- Protected routes and middleware
-- Role-based access control
-
-### Organization Management
-- Multi-organization support
-- Team member invitations
-- Organization settings and management
-- User settings and preferences
-
-### UI/UX
-- Modern, responsive design using Tailwind CSS
-- Dark/Light mode support
-- Customizable dashboard layout
-- Sidebar navigation
-- Built with shadcn/ui components
-
-### Developer Experience
-- Type-safe using TypeScript
-- Database management with Drizzle ORM
-- PostgreSQL database
-- Environment variable validation with T3 Env
-- Form validation using Zod
-- PostHog analytics integration
-- Code formatting and linting pre-configured
-
-### Payment Integration (Coming Soon)
-- Stripe integration for subscription management
-- Paddle integration for global payments
-- Usage-based billing
-- Multiple pricing tiers
+- Magic Link Auth: login with better-auth & resend, plus GitHub OAuth.
+- Role-Based Access: protected routes, middleware, and team roles.
+- Multi-Organization Support: manage teams, settings, and user preferences.
+- Modern UI/UX: tailwind css, dark/light mode, customizable dashboards.
+- Type-Safe Development: typescript, drizzle orm, postgres, zod validation.
+- Analytics Integration: track usage with posthog.
+- Payment Integration (soon): stripe, paddle, and flexible billing.
 
 ## 📦 Tech Stack
 
@@ -55,29 +29,33 @@ A production-ready free SaaS starter kit built with Next.js, featuring authentic
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - PostgreSQL
 - npm or pnpm
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/warisareshi/startstack.git
 cd saas-starter
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 3. Copy the example environment file:
+
 ```bash
 cp .env.example .env
 ```
 
 4. Update the environment variables in `.env` with your:
+
 - Database credentials
 - Better-Auth configuration
 - GitHub OAuth credentials
@@ -85,18 +63,21 @@ cp .env.example .env
 - PostHog API key
 
 5. Run database migrations:
+
 ```bash
-pnpm db:migrate
+pnpm drizzle:generate:dev
+pnpm drizzle:migrate:dev
 ```
 
 6. Start the development server:
+
 ```bash
 pnpm dev
 ```
 
 Visit `http://localhost:3000` to see your application.
 
-## 📝 Environment Variables (* means optional)
+## 📝 Environment Variables (\* means optional)
 
 ```env
 # Database
@@ -125,6 +106,7 @@ NEXT_PUBLIC_APP_URL=
 ## 🛣️ Roadmap
 
 ### ✅ Implemented
+
 - [x] Magic Link Authentication with better-auth and Resend
 - [x] GitHub OAuth Integration
 - [x] Protected Routes
@@ -140,6 +122,7 @@ NEXT_PUBLIC_APP_URL=
 - [x] Drizzle + PostgreSQL Setup
 
 ### 🚧 Upcoming
+
 - [ ] Stripe Integration
 - [ ] Paddle Integration
 - [ ] PostHog Analytics
