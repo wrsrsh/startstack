@@ -84,7 +84,7 @@ export function WorkspaceSwitcher({
               disabled={isLoading}
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg border bg-background">
-                {optimisticOrganization.logo ? (
+                {optimisticOrganization?.logo ? (
                   <Image
                     src={optimisticOrganization.logo}
                     alt={optimisticOrganization.name}

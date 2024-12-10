@@ -1,8 +1,6 @@
-import { AppSidebar } from "@/components/sidebar/c";
-import { PageTitle } from "@/components/page-title";
+import { AppSidebar } from "@/components/sidebar/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
-import { authClient } from "@/lib/auth/client";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -10,12 +8,14 @@ import Loading from "@/app/loading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SIDEBAR_WIDTH, SIDEBAR_WIDTH_MOBILE } from "@/components/ui/sidebar";
 import { ActiveOrganization } from "@/types/auth";
+import { authValidator } from "@/lib/auth/validate";
 
 export default async function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await authValidator();
   const data = await auth.api.listOrganizations({
     headers: await headers(),
   });
