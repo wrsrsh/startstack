@@ -8,6 +8,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { ToasterWithTheme } from "@/components/toaster-with-theme";
 import { createMetadata } from "@/lib/metadata";
 import { APP_NAME } from "@/constants";
+import { PostHogProvider } from "@/providers/posthog-provider";
 
 export const metadata = createMetadata({
   title: {
@@ -16,7 +17,7 @@ export const metadata = createMetadata({
   },
   description: "The easiest way to get started with your next project",
 });
-  
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,22 +26,22 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
-        {/* <AppPostHogProvider> */}
-        <body className="h-screen bg-orange-50/50 dark:bg-gray-900/10">
-          <NuqsAdapter>
-            <ThemeProvider
-              attribute={"class"}
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {children}
-              <ModeToggle className="absolute right-4 top-4" />
-            </ThemeProvider>
-          </NuqsAdapter>
-          <ToasterWithTheme position="bottom-right"/>
-        </body>
-        {/* </AppPostHogProvider> */}
+        <PostHogProvider>
+          <body className="h-screen bg-orange-50/50 dark:bg-gray-900/10">
+            <NuqsAdapter>
+              <ThemeProvider
+                attribute={"class"}
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                {children}
+                <ModeToggle className="absolute right-4 top-4" />
+              </ThemeProvider>
+            </NuqsAdapter>
+            <ToasterWithTheme position="bottom-right" />
+          </body>
+        </PostHogProvider>
       </html>
     </ViewTransitions>
   );

@@ -45,6 +45,7 @@
     "nuqs": "^2.2.3",
     "oslo": "^1.2.1",
     "postgres": "^3.4.5",
+    "posthog-js": "^1.195.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-hook-form": "^7.53.2",

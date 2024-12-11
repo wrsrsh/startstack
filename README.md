@@ -120,12 +120,12 @@ NEXT_PUBLIC_APP_URL=
 - [x] T3 Env Integration
 - [x] Zod Validation
 - [x] Drizzle + PostgreSQL Setup
+- [x] PostHog Analytics
 
 ### 🚧 Upcoming
 
 - [ ] Stripe Integration
 - [ ] Paddle Integration
-- [ ] PostHog Analytics
 - [ ] Admin Dashboard
 - [ ] Better Design
 
