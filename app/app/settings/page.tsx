@@ -1,15 +1,20 @@
 import React, { Suspense } from "react";
-import { AccountPage } from "./_components/account-page";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { PageTitle } from "@/components/page-title";
-import { WorkspacePage } from "./_components/workspace-page";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Loading from "@/app/loading";
+import { SettingsSidebar } from "./_components/settings-sidebar";
+import { AccountPage } from "./_components/account-page";
+import { WorkspacePage } from "./_components/workspace-page";
 import { AppearancePage } from "./_components/appearance-page";
 import { NotificationPage } from "./_components/notifications-page";
+// import { BillingPage } from "./_components/billing-page";
 
-export default async function SettingsPage() {
+export default async function SettingsPage({
+  searchParams,
+}: {
+  searchParams: { tab?: string };
+}) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -19,42 +24,31 @@ export default async function SettingsPage() {
   const activeOrganization = await auth.api.getFullOrganization({
     headers: await headers(),
   });
+
+  const tab = searchParams.tab || "account";
+
   return (
-    <main className="flex flex-col px-4">
+    <section className="px-4 py-2">
       <PageTitle selfLabel="Settings" />
-      <Tabs defaultValue="account" className="grid w-full gap-2">
-        <TabsList className="grid grid-flow-col grid-cols-5">
-          <TabsTrigger value="account">Account & Security</TabsTrigger>
-          <TabsTrigger value="workspace">Workspace Preferences</TabsTrigger>
-          <TabsTrigger value="billing">Billing & Plans</TabsTrigger>
-          <TabsTrigger value="notifications">Emails & Notifications</TabsTrigger>
-          <TabsTrigger value="appearance">Appearance</TabsTrigger>
-        </TabsList>
-        <TabsContent value="account">
+      <div className="flex gap-8">
+        <SettingsSidebar activeTab={tab} />
+        <main className="flex-1">
           <Suspense fallback={<Loading />}>
-            <AccountPage activeSessions={activeSessions} session={session} />
+            {tab === "account" && (
+              <AccountPage activeSessions={activeSessions} session={session} />
+            )}
+            {tab === "workspace" && (
+              <WorkspacePage
+                activeOrganization={activeOrganization}
+                session={session}
+              />
+            )}
+            {/* {tab === "billing" && <BillingPage />} */}
+            {tab === "notifications" && <NotificationPage />}
+            {tab === "appearance" && <AppearancePage />}
           </Suspense>
-        </TabsContent>
-        <TabsContent value="workspace">
-          <Suspense fallback={<Loading />}>
-            <WorkspacePage
-              activeOrganization={activeOrganization}
-              session={session}
-            />
-          </Suspense>
-        </TabsContent>
-        <TabsContent value="appearance">
-          <Suspense fallback={<Loading />}>
-            <AppearancePage />
-          </Suspense>
-        </TabsContent>
-        <TabsContent value="notifications">
-          <Suspense fallback={<Loading />}>
-            <NotificationPage />
-          </Suspense>
-        </TabsContent>
-      </Tabs>
-      <section className="flex flex-col gap-4"></section>
-    </main>
+        </main>
+      </div>
+    </section>
   );
 }

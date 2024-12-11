@@ -193,7 +193,7 @@ export function WorkspacePage(props: {
                       <Button
                         disabled={isRevoking.includes(invitation.id)}
                         size="sm"
-                        variant="outline"
+                        variant="destructive"
                         onClick={() => {
                           organization.cancelInvitation(
                             {
