@@ -82,10 +82,10 @@ export function AppSidebar({
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader>
+      <SidebarHeader className="pt-4">
         <WorkspaceSwitcher activeOrganization={activeOrganization} />
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="-mt-1">
         <SidebarGroup>
           <SidebarMenu>
             {data.navMain.map((item) => (

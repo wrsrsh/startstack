@@ -1,12 +1,16 @@
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "./_components/app-sidebar";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "@/app/loading";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SIDEBAR_WIDTH, SIDEBAR_WIDTH_MOBILE } from "@/components/ui/sidebar";
+import {
+  SIDEBAR_WIDTH,
+  SIDEBAR_WIDTH_MOBILE,
+  SidebarProvider,
+  SidebarInset,
+} from "@/components/ui/sidebar";
 import { ActiveOrganization } from "@/types/auth";
 import { authValidator } from "@/lib/auth/validate";
 

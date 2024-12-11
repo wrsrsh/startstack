@@ -5,7 +5,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ViewTransitions } from "next-view-transitions";
 import { Toaster } from "sonner";
 import { ModeToggle } from "@/components/mode-toggle";
-import { ToasterWithTheme } from "@/components/toaster-with-theme";
+import { CustomToaster } from "@/components/toaster-with-theme";
 import { createMetadata } from "@/lib/metadata";
 import { APP_NAME } from "@/constants";
 import { PostHogProvider } from "@/providers/posthog-provider";
@@ -39,7 +39,7 @@ export default function RootLayout({
                 <ModeToggle className="absolute right-4 top-4" />
               </ThemeProvider>
             </NuqsAdapter>
-            <ToasterWithTheme position="bottom-right" />
+            <CustomToaster />
           </body>
         </PostHogProvider>
       </html>

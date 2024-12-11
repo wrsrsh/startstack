@@ -32,7 +32,9 @@ export function NotificationPage() {
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between opacity-50">
           <div className="space-y-0.5">
-            <Label htmlFor="essential" className="">Essential</Label>
+            <Label htmlFor="essential" className="">
+              Essential
+            </Label>
             <p className="text-sm text-muted-foreground">
               Important account and security updates
             </p>

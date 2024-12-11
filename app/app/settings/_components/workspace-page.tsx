@@ -82,17 +82,15 @@ export function WorkspacePage(props: {
   return (
     <Card className="w-full bg-background shadow-lg">
       <CardHeader className="pb-6">
-        <CardTitle className="mb-4 text-base">
-          Workspace Options
-        </CardTitle>
+        <CardTitle className="mb-4 text-base">Workspace Options</CardTitle>
         <div className="flex items-center gap-4">
-          <Avatar className="h-12 w-12 rounded-lg">
+          <Avatar className="h-12 w-12 rounded-full">
             <AvatarImage
-              className="h-full w-full rounded-lg object-cover"
+              className="h-full w-full rounded-full object-cover"
               src={optimisticOrg?.logo || ""}
             />
-            <AvatarFallback className="rounded-lg text-lg">
-              {optimisticOrg?.name?.slice(0,2).toUpperCase() || "P"}
+            <AvatarFallback className="rounded-full text-lg">
+              {optimisticOrg?.name?.slice(0, 2).toUpperCase() || "P"}
             </AvatarFallback>
           </Avatar>
           <div>
@@ -121,7 +119,7 @@ export function WorkspacePage(props: {
                       src={member.user.image || ""}
                       className="object-cover"
                     />
-                    <AvatarFallback className="text-base font-medium bg-muted-foreground text-white">
+                    <AvatarFallback className="bg-muted-foreground text-base font-medium text-white">
                       {member.user.name?.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>

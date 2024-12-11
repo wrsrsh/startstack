@@ -11,11 +11,13 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { ActiveOrganization, Organization } from "@/types/auth";
 import { authClient } from "@/lib/auth/client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export function WorkspaceSwitcher({
   activeOrganization,
@@ -30,6 +32,8 @@ export function WorkspaceSwitcher({
 
   const router = useRouter();
 
+  const { open } = useSidebar();
+
   const setActiveOrganization = async (organizationId: string) => {
     try {
       setIsLoading(true);
@@ -40,7 +44,7 @@ export function WorkspaceSwitcher({
       console.error("Failed to set active organization:", error);
     } finally {
       setIsLoading(false);
-      router.refresh()
+      router.refresh();
     }
   };
 
@@ -77,13 +81,16 @@ export function WorkspaceSwitcher({
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger
+            asChild
+            className={cn(open ? "border border-input" : "")}
+          >
             <SidebarMenuButton
               size="lg"
-              className="!border-none data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               disabled={isLoading}
             >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg border bg-background">
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg border bg-muted">
                 {optimisticOrganization?.logo ? (
                   <Image
                     src={optimisticOrganization.logo}
@@ -91,7 +98,7 @@ export function WorkspaceSwitcher({
                     className="size-4 object-contain"
                   />
                 ) : (
-                  optimisticOrganization.name?.slice(0, 2).toUpperCase()
+                  optimisticOrganization.name?.slice(0, 1).toUpperCase()
                 )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -106,11 +113,11 @@ export function WorkspaceSwitcher({
                   )}
                 </span>
               </div>
-              <ChevronsUpDown className="ml-auto size-4" />
+              <ChevronsUpDown className="size-1` ml-auto mr-1" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg py-2"
             align="start"
             side="bottom"
             sideOffset={4}
@@ -118,10 +125,10 @@ export function WorkspaceSwitcher({
             {organizations.map((org) => (
               <DropdownMenuItem
                 key={org.id}
-                className="gap-2 p-2"
+                className="gap-2 rounded-full p-2"
                 onSelect={() => setActiveOrganization(org.id)}
               >
-                <div className="flex size-6 items-center justify-center rounded-md border bg-background">
+                <div className="flex size-6 items-center justify-center rounded-full border bg-background !text-sm">
                   {org.logo ? (
                     <Image
                       src={org.logo}
@@ -129,14 +136,14 @@ export function WorkspaceSwitcher({
                       className="size-4 object-contain"
                     />
                   ) : (
-                    org.name?.slice(0, 2).toUpperCase()
+                    org.name?.slice(0, 1).toUpperCase()
                   )}
                 </div>
                 <div className="font-medium">{org.name}</div>
               </DropdownMenuItem>
             ))}
             <DropdownMenuItem
-              className="gap-2 p-2"
+              className="gap-2 rounded-full p-2"
               onClick={() => {
                 router.push("/signup/create-workspace");
               }}

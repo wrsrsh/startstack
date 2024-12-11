@@ -96,7 +96,7 @@ const MagicLinkEmailBody = ({ email, url }: { email: string; url: string }) => {
               borderStyle: "solid",
               fontSize: "14px",
               fontWeight: 550,
-              borderRadius: "6px",
+              borderRadius: "100px",
               fontFamily: "'Inter', sans-serif",
               cursor: "pointer",
             }}

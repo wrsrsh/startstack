@@ -60,7 +60,9 @@ export function AccountPage(props: {
                 alt="Avatar"
                 className="object-cover"
               />
-              <AvatarFallback className="text-lg uppercase">{session?.user.name.charAt(0)}</AvatarFallback>
+              <AvatarFallback className="text-lg uppercase">
+                {session?.user.name.charAt(0)}
+              </AvatarFallback>
             </Avatar>
             <div>
               <p className="text-base font-medium">{session?.user.name}</p>
