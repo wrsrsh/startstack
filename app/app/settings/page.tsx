@@ -13,8 +13,12 @@ import { NotificationPage } from "./_components/notifications-page";
 export default async function SettingsPage({
   searchParams,
 }: {
-  searchParams: { tab?: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  // Since searchParams is now a Promise in Next.js 15, we need to await it
+  const resolvedSearchParams = await searchParams;
+  const tab = resolvedSearchParams.tab ?? "account";
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -25,13 +29,11 @@ export default async function SettingsPage({
     headers: await headers(),
   });
 
-  const tab = searchParams.tab || "account";
-
   return (
     <section className="px-4 py-2">
       <PageTitle selfLabel="Settings" />
       <div className="flex gap-8">
-        <SettingsSidebar activeTab={tab} />
+        <SettingsSidebar activeTab={tab as string} />
         <main className="flex-1">
           <Suspense fallback={<Loading />}>
             {tab === "account" && (

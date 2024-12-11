@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { UserCircle, Building2, CreditCard, Bell, Palette } from "lucide-react";
+import { UserCircle, Building2, CreditCard, Bell, Palette } from 'lucide-react';
 
 const settingsTabs = [
   { name: "Account & Security", value: "account", icon: UserCircle },
@@ -26,7 +26,7 @@ export function SettingsSidebar({ activeTab }: { activeTab: string }) {
               "w-full justify-start",
               activeTab === tab.value
                 ? "bg-muted hover:bg-muted"
-                : "hover:bg-transparent hover:underline",
+                : "hover:bg-transparent hover:underline"
             )}
           >
             <tab.icon className="mr-2 h-4 w-4" />
@@ -37,3 +37,4 @@ export function SettingsSidebar({ activeTab }: { activeTab: string }) {
     </nav>
   );
 }
+
