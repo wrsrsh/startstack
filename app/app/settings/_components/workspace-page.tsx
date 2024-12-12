@@ -358,24 +358,26 @@ function CreateOrganizationDialog() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="org-logo">Logo</Label>
-            <Input
-              id="org-logo"
-              type="file"
-              accept="image/*"
-              onChange={handleLogoChange}
-              className="w-full"
-            />
-            {logo && (
-              <div className="mt-2">
-                <Image
-                  src={logo}
-                  alt="Logo preview"
-                  className="h-16 w-16 rounded-lg object-cover"
-                  width={64}
-                  height={64}
-                />
-              </div>
-            )}
+            <div className="flex items-center">
+              <Input
+                id="org-logo"
+                type="file"
+                accept="image/*"
+                onChange={handleLogoChange}
+                className="w-full cursor-pointer underline flex items-center"
+              />
+              {logo && (
+                <div className="mt-2">
+                  <Image
+                    src={logo}
+                    alt="Logo preview"
+                    className="h-16 w-16 rounded-lg object-cover"
+                    width={64}
+                    height={64}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <DialogFooter>

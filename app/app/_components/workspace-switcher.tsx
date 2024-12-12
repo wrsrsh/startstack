@@ -44,7 +44,8 @@ export function WorkspaceSwitcher({
       console.error("Failed to set active organization:", error);
     } finally {
       setIsLoading(false);
-      window.location.reload();
+      router.refresh();
+      // window.location.reload();
     }
   };
 
@@ -57,7 +58,7 @@ export function WorkspaceSwitcher({
     ) {
       setActiveOrganization(organizations[0].id);
     }
-  }, [activeOrganization, organizations]);
+  }, [activeOrganization, organizations, setActiveOrganization]);
 
   if (!activeOrganization || !organizations) {
     return (
@@ -98,7 +99,8 @@ export function WorkspaceSwitcher({
                     className="size-4 object-contain"
                   />
                 ) : (
-                  optimisticOrganization?.name?.slice(0, 1).toUpperCase() ?? "-"
+                  (optimisticOrganization?.name?.slice(0, 1).toUpperCase() ??
+                  "-")
                 )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">

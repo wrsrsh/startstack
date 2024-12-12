@@ -5,7 +5,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ViewTransitions } from "next-view-transitions";
 import { Toaster } from "sonner";
 import { ModeToggle } from "@/components/mode-toggle";
-import { CustomToaster } from "@/components/toaster-with-theme";
+import { CustomToaster } from "@/components/custom-toaster";
 import { createMetadata } from "@/lib/metadata";
 import { APP_NAME } from "@/constants";
 import { PostHogProvider } from "@/providers/posthog-provider";
