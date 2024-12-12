@@ -8,8 +8,8 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import { authClient, signIn, updateUser } from "@/lib/auth/client";
+import { useState } from "react";
+import { signIn } from "@/lib/auth/client";
 import { signUpSchema } from "@/schemas/auth.schema";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,16 +24,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export function SignupForm() {
-  const [githubLoading, setGithubLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
-  const [magicLinkLoading, setMagicLinkLoading] = useState(false);
-
-  const loading = githubLoading || googleLoading || magicLinkLoading;
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -43,57 +38,36 @@ export function SignupForm() {
     },
   });
 
-  const emailValue = form.watch("email");
-
   const router = useRouter();
 
-  useEffect(() => {
-    setMagicLinkLoading(false);
-    setGoogleLoading(false);
-    setGithubLoading(false);
-  }, []);
-
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
-    setMagicLinkLoading(true);
     try {
-      const { error } = await signIn.magicLink({
+      setLoading(true);
+      setTimeout(() => {
+        router.push("/signup/sent");
+      }, 250);
+      const result = await signIn.magicLink({
         email: data.email,
-        callbackURL: "/",
+        callbackURL: "/app/home",
       });
-      if (error) {
-        toast.error(error.message);
+
+      if (result.error) {
+        toast.error(result.error.message);
         return;
       }
-      router.push("/signup/sent");
-      // await updateUser({name: data.fullName});
     } catch (error) {
       toast.error(
         "Something went wrong. Contact support if the issue persists",
       );
     } finally {
-      setMagicLinkLoading(false);
+      setLoading(false);
     }
   };
-
   const onGithubSubmit = async () => {
-    setGithubLoading(true);
+    setLoading(true);
     try {
       await signIn.social({
         provider: "github",
-        callbackURL: "/",
-      });
-    } catch (error) {
-      toast.error(
-        "Something went wrong. Contact support if the issue persists",
-      );
-    }
-  };
-
-  const onGoogleSubmit = async () => {
-    setGoogleLoading(true);
-    try {
-      await signIn.social({
-        provider: "google",
         callbackURL: "/",
       });
     } catch (error) {
@@ -117,42 +91,13 @@ export function SignupForm() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="grid w-full space-y-3"
           >
-            {/* <Button
-                    type="button"
-                    variant={"outline"}
-                    disabled={loading}
-                    onClick={onGoogleSubmit}
-                  >
-                    {googleLoading ? (
-                      <span className="flex items-center gap-2">
-                        <Loader2 className="animate-spin size-4" />
-                      </span>
-                    ) : (
-                      <>
-                        <span className="flex items-center gap-2">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="1em"
-                            height="1em"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="M11.99 13.9v-3.72h9.36c.14.63.25 1.22.25 2.05c0 5.71-3.83 9.77-9.6 9.77c-5.52 0-10-4.48-10-10S6.48 2 12 2c2.7 0 4.96.99 6.69 2.61l-2.84 2.76c-.72-.68-1.98-1.48-3.85-1.48c-3.31 0-6.01 2.75-6.01 6.12s2.7 6.12 6.01 6.12c3.83 0 5.24-2.65 5.5-4.22h-5.51z"
-                            ></path>
-                          </svg>
-                          Continue with Google
-                        </span>
-                      </>
-                    )}
-                  </Button> */}
             <Button
               type="button"
               variant={"outline"}
               disabled={loading}
               onClick={onGithubSubmit}
             >
-              {githubLoading ? (
+              {loading ? (
                 <span className="flex items-center gap-2">
                   <Loader2 className="size-4 animate-spin" />
                 </span>
@@ -213,7 +158,7 @@ export function SignupForm() {
               )}
             />
             <Button type="submit" disabled={loading}>
-              {magicLinkLoading ? (
+              {loading ? (
                 <span className="flex items-center gap-2">
                   <Loader2 className="size-4 animate-spin" />
                 </span>
