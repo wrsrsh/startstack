@@ -1,5 +1,7 @@
 A free commercial/personal, production-ready SaaS starter kit built with Next.js. Includes authentication, organization management, analytics, and more.
 
+![Screenshot](public/images/landing_ss.png)
+
 ## Features
 
 - Magic Link Auth: login with Better-Auth & Resend, plus GitHub OAuth.
