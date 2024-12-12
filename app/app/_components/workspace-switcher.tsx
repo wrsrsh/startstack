@@ -44,7 +44,7 @@ export function WorkspaceSwitcher({
       console.error("Failed to set active organization:", error);
     } finally {
       setIsLoading(false);
-      router.refresh();
+      window.location.reload();
     }
   };
 
@@ -93,17 +93,17 @@ export function WorkspaceSwitcher({
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg border bg-muted">
                 {optimisticOrganization?.logo ? (
                   <Image
-                    src={optimisticOrganization.logo}
-                    alt={optimisticOrganization.name}
+                    src={optimisticOrganization?.logo}
+                    alt={optimisticOrganization?.name}
                     className="size-4 object-contain"
                   />
                 ) : (
-                  optimisticOrganization.name?.slice(0, 1).toUpperCase()
+                  optimisticOrganization?.name?.slice(0, 1).toUpperCase() ?? "-"
                 )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  {optimisticOrganization.name}
+                  {optimisticOrganization?.name}
                 </span>
                 <span className="truncate text-xs text-muted-foreground">
                   {isLoading ? (

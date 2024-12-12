@@ -6,10 +6,11 @@ import { Toaster, ToasterProps } from "sonner";
 type Theme = "light" | "dark" | "system";
 
 export function CustomToaster(props: ToasterProps) {
+  const { theme } = useTheme();
   return (
     <Toaster
       {...props}
-      theme={"system"}
+      theme={theme as Theme}
       position="bottom-right"
       richColors
       visibleToasts={2}

@@ -13,7 +13,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { usePathname } from "next/navigation";
 
-export function ModeToggle({ className }: { className?: string }) {
+export function ModeToggle({
+  className,
+  caller,
+}: {
+  className?: string;
+  caller: "layout" | "page";
+}) {
   const { setTheme } = useTheme();
   const pathName = usePathname();
   const disabledPathnamesStart: string[] = ["/app/settings"];
@@ -24,7 +30,10 @@ export function ModeToggle({ className }: { className?: string }) {
     )
   ) {
     return null;
+  } else if (caller !== "page" && pathName === "/") {
+    return null;
   }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={className}>

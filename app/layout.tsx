@@ -36,10 +36,13 @@ export default function RootLayout({
                 disableTransitionOnChange
               >
                 {children}
-                <ModeToggle className="absolute right-4 top-4" />
+                <ModeToggle
+                  className="absolute right-4 top-4"
+                  caller="layout"
+                />
+                <CustomToaster />
               </ThemeProvider>
             </NuqsAdapter>
-            <CustomToaster />
           </body>
         </PostHogProvider>
       </html>
