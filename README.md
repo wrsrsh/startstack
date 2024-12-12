@@ -1,4 +1,4 @@
-A free, production-ready SaaS starter kit built with Next.js. Includes authentication, organization management, analytics, and more.
+A free commercial/personal, production-ready SaaS starter kit built with Next.js. Includes authentication, organization management, analytics, and more.
 
 ## Features
 
