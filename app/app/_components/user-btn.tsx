@@ -7,7 +7,6 @@ import {
   Loader2,
   LogOut,
   Palette,
-  Sparkles,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -37,7 +36,7 @@ export function UserButton() {
   const { data: session } = authClient.useSession();
 
   const router = useRouter();
-  const [loggingOut, setLoggingOut] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);  
 
   return (
     <SidebarMenu>
@@ -50,16 +49,16 @@ export function UserButton() {
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage
-                  src={session?.user.image ?? ""}
-                  alt={session?.user.name}
+                  src={session?.user?.image ?? ""}
+                  alt={session?.user?.name}
                 />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">
-                  {session?.user.name}
+                  {session?.user?.name}
                 </span>
-                <span className="truncate text-xs">{session?.user.email}</span>
+                <span className="truncate text-xs">{session?.user?.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -74,19 +73,19 @@ export function UserButton() {
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage
-                    src={session?.user.image ?? ""}
-                    alt={session?.user.name}
+                    src={session?.user?.image ?? ""}
+                    alt={session?.user?.name}
                   />
                   <AvatarFallback className="rounded-lg">
-                    {session?.user.name.slice(0, 1).toUpperCase()}
+                    {session?.user?.name?.slice(0, 1).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
-                    {session?.user.name}
+                    {session?.user?.name}
                   </span>
                   <span className="truncate text-xs">
-                    {session?.user.email}
+                    {session?.user?.email}
                   </span>
                 </div>
               </div>
@@ -94,31 +93,31 @@ export function UserButton() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <Link href="/app/settings?page=account">
-                <DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
                   <BadgeCheck />
                   Account
                 </DropdownMenuItem>
               </Link>
               <Link href="/app/settings?page=workspace">
-                <DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
                   <Building2 />
                   Workspace
                 </DropdownMenuItem>
               </Link>
               <Link href="/app/settings?page=billing">
-                <DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
                   <CreditCard />
                   Billing
                 </DropdownMenuItem>
               </Link>
               <Link href="/app/settings?page=notifications">
-                <DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
                   <Bell />
                   Notifications
                 </DropdownMenuItem>
               </Link>
               <Link href="/app/settings?page=notifications">
-                <DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
                   <Palette />
                   Appearance
                 </DropdownMenuItem>
