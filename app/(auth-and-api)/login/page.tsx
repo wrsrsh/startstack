@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { LoginForm } from "@/components/forms/login-form";
 import { Metadata } from "next";
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Loading from "@/app/loading";

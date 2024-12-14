@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth/server";
 import { headers } from "next/headers";
 import { PageTitle } from "@/components/page-title";
 import { Settings } from "./_components/settings";

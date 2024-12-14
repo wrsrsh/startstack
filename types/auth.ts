@@ -1,4 +1,4 @@
-import type { auth } from "../lib/auth";
+import type { auth } from "../lib/auth/server";
 import { authClient } from "../lib/auth/client";
 
 export type Session = typeof auth.$Infer.Session;

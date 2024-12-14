@@ -29,7 +29,7 @@ import { authClient } from "@/lib/auth/client";
 
 export function CreateWorkspaceForm() {
   const [loading, setLoading] = useState(false);
-
+  
   const form = useForm<z.infer<typeof onboardingSchema>>({
     resolver: zodResolver(onboardingSchema),
     defaultValues: {

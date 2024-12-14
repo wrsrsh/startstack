@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,8 +23,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "env": ["./env.js"]
+      "@/*": [
+        "./*"
+      ],
+      "env": [
+        "./env.js"
+      ]
     }
   },
   "include": [
@@ -30,5 +38,7 @@
     ".next/types/**/*.ts",
     "app/app/home/_components/random-toast.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

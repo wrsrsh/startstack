@@ -1,8 +1,7 @@
-import { betterAuth } from "better-auth";
+import { betterAuth, BetterAuthError } from "better-auth";
 import { magicLink, organization } from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import * as tables from "@/database/tables";
-// import * as relations from "@/database/relations";
 import env from "env";
 import { db } from "@/database";
 import { sendMagicLink } from "@/emails/magic-link";
@@ -12,6 +11,11 @@ import { APP_NAME } from "@/constants";
 export const auth = betterAuth({
   appName: APP_NAME,
   baseURL: env.NEXT_PUBLIC_APP_URL,
+  trustedOrigins: [env.NEXT_PUBLIC_APP_URL],
+  logger: {
+    disabled: process.env.NODE_ENV === "production",
+    level: "debug",
+  },
   session: {
     expiresIn: 60 * 60 * 24 * 30, // 30 days
     cookieCache: {
@@ -54,9 +58,10 @@ export const auth = betterAuth({
     }),
     magicLink({
       sendMagicLink: async ({ email, url }, request) => {
-        await sendMagicLink(email, url);
-        if (process.env.NODE_ENV === "development")
+        if (process.env.NODE_ENV === "development") {
           console.log("✨ Magic link: " + url);
+        }
+        await sendMagicLink(email, url);
       },
     }),
   ],

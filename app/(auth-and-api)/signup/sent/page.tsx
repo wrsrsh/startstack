@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth/server";
 import { CheckCircle } from "lucide-react";
 import { Metadata } from "next";
 import { headers } from "next/headers";

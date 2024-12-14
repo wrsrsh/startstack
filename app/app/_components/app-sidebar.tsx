@@ -23,10 +23,8 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { usePathname, useRouter } from "next/navigation";
-import { WorkspaceSwitcher } from "./workspace-switcher";
-import { signOut } from "@/lib/auth/client";
-import { toast } from "sonner";
-import { ActiveOrganization, Organization } from "@/types/auth";
+import { UserButton } from "./user-btn";
+import Link from "next/link";
 
 // Simplified data
 const data = {
@@ -45,11 +43,6 @@ const data = {
       title: "Home",
       url: "/app/home",
       icon: Home,
-    },
-    {
-      title: "Settings",
-      url: "/app/settings",
-      icon: Settings,
     },
   ],
   projects: [
@@ -71,30 +64,21 @@ const data = {
   ],
 };
 
-export function AppSidebar({
-  activeOrganization,
-}: {
-  activeOrganization: ActiveOrganization;
-}) {
-  const router = useRouter();
-  const [loggingOut, setLoggingOut] = React.useState(false);
+export function AppSidebar() {
   const pathName = usePathname();
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="pt-4">
-        <WorkspaceSwitcher activeOrganization={activeOrganization} />
-      </SidebarHeader>
-      <SidebarContent className="-mt-1">
+      <SidebarContent className="pt-2">
         <SidebarGroup>
           <SidebarMenu>
             {data.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild isActive={item.url === pathName}>
-                  <a href={item.url}>
+                  <Link href={item.url}>
                     {item.icon && <item.icon />}
                     <span>{item.title}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
@@ -102,7 +86,7 @@ export function AppSidebar({
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenu>
+        {/* <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
@@ -142,7 +126,8 @@ export function AppSidebar({
               )}
             </SidebarMenuButton>
           </SidebarMenuItem>
-        </SidebarMenu>
+        </SidebarMenu> */}
+        <UserButton />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

@@ -48,7 +48,7 @@ export function SignupForm() {
       }, 250);
       const result = await signIn.magicLink({
         email: data.email,
-        callbackURL: "/app/home",
+        callbackURL: "/signup/create-workspace",
       });
 
       if (result.error) {
