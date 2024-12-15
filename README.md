@@ -1,12 +1,11 @@
-A free commercial/personal, production-ready SaaS starter kit built with Next.js. Includes authentication, organization management, analytics, and more.
+# A free commercial/personal, production-ready SaaS starter kit built with Next.js. Includes authentication, analytics, and more.
 
 ![Screenshot](public/images/landing_ss.png)
 
 ## Features
 
 - Magic Link Auth: login with Better-Auth & Resend, plus GitHub OAuth.
-- Role-Based Access: protected routes, middleware, and team roles.
-- Multi-Organization Support: manage teams, settings, and preferences.
+- Role-Based Access: protected routes and middleware.
 - Modern UI/UX: Tailwind CSS, dark/light mode, and dashboards.
 - Type-Safe Development: TypeScript, Drizzle ORM, PostgreSQL, Zod validation.
 - Analytics: PostHog integration.
@@ -30,10 +29,6 @@ A free commercial/personal, production-ready SaaS starter kit built with Next.js
 - [x] Magic Link Authentication with Better-Auth and Resend
 - [x] GitHub OAuth Integration
 - [x] Protected Routes
-- [x] Organization and Team Management
-  - [x] Multi-organization support
-  - [x] Team invitations
-  - [x] Organization settings
 - [x] User Settings
 - [x] Dark/Light Mode
 - [x] Dashboard & Sidebar (shadcn)
