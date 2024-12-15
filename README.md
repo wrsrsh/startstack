@@ -40,8 +40,7 @@
 
 ### Upcoming
 
-- [ ] Stripe Integration
-- [ ] Paddle Integration
+- [ ] Payments
 - [ ] Admin Dashboard
 - [ ] Improved Design
 
