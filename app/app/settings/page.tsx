@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth/server";
 import { headers } from "next/headers";
 import { PageTitle } from "@/components/page-title";
 import { Settings } from "./_components/settings";
+import Loading from "@/app/loading";
 
 export default async function SettingsPage() {
   const session = await auth.api.getSession({
@@ -15,10 +16,9 @@ export default async function SettingsPage() {
   return (
     <section className="px-4 py-2">
       <PageTitle selfLabel="Settings" />
-      <Settings
-        session={session}
-        activeSessions={activeSessions}
-      />
+      <Suspense fallback={<Loading />}>
+        <Settings session={session} activeSessions={activeSessions} />
+      </Suspense>
     </section>
   );
 }
