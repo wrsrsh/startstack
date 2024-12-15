@@ -5,7 +5,7 @@
 ## Features
 
 - Magic Link Auth: login with Better-Auth & Resend, plus GitHub OAuth.
-- Role-Based Access: protected routes and middleware.
+- Protected Access: protected routes and middleware.
 - Modern UI/UX: Tailwind CSS, dark/light mode, and dashboards.
 - Type-Safe Development: TypeScript, Drizzle ORM, PostgreSQL, Zod validation.
 - Analytics: PostHog integration.
