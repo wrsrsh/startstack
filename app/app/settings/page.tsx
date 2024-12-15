@@ -11,16 +11,12 @@ export default async function SettingsPage() {
   const activeSessions = await auth.api.listSessions({
     headers: await headers(),
   });
-  const activeOrganization = await auth.api.getFullOrganization({
-    headers: await headers(),
-  });
 
   return (
     <section className="px-4 py-2">
       <PageTitle selfLabel="Settings" />
       <Settings
         session={session}
-        activeOrganization={activeOrganization}
         activeSessions={activeSessions}
       />
     </section>

@@ -7,7 +7,7 @@ import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
   baseURL: env.NEXT_PUBLIC_APP_URL,
-  plugins: [organizationClient(), magicLinkClient()],
+  plugins: [magicLinkClient()],
 });
 
 export const {
@@ -24,10 +24,6 @@ export const {
   sendVerificationEmail,
   changeEmail,
   deleteUser,
-  useListOrganizations,
-  useActiveOrganization,
-  useActiveMember,
-  organization,
   linkSocial,
   forgetPassword,
   verifyEmail,

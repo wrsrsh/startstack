@@ -11,7 +11,6 @@ import {
   SidebarProvider,
   SidebarInset,
 } from "@/components/ui/sidebar";
-import { ActiveOrganization, Organization } from "@/types/auth";
 import { authValidator } from "@/lib/auth/validate";
 
 export default async function AppLayout({
@@ -20,7 +19,6 @@ export default async function AppLayout({
   children: React.ReactNode;
 }>) {
   await authValidator();
-
   return (
     <SidebarProvider>
       <AppSidebar />

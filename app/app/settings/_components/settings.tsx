@@ -1,7 +1,6 @@
 "use client";
 import React, { Suspense, useEffect } from "react";
 import { AccountPage } from "./account-page";
-import { WorkspacePage } from "./workspace-page";
 import Loading from "@/app/loading";
 import { AppearancePage } from "./appearance-page";
 import { NotificationPage } from "./notifications-page";
@@ -9,24 +8,21 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useQueryState } from "nuqs";
 import { Bell, Building2, CreditCard, Palette, UserCircle } from "lucide-react";
-import { ActiveOrganization, Session } from "@/types/auth";
+import { Session } from "@/types/auth";
 
 const settingsTabs = [
   { name: "Account & Security", value: "account", icon: UserCircle },
-  { name: "Workspace Preferences", value: "workspace", icon: Building2 },
   { name: "Billing & Plans", value: "billing", icon: CreditCard },
   { name: "Emails & Notifications", value: "notifications", icon: Bell },
   { name: "Appearance", value: "appearance", icon: Palette },
 ];
 
 export function Settings({
-  activeOrganization,
   activeSessions,
   session,
 }: {
   session: Session | null;
   activeSessions: Session["session"][];
-  activeOrganization: ActiveOrganization | null;
 }) {
   const [tab, setTab] = useQueryState("page", {});
   useEffect(() => {
@@ -58,12 +54,6 @@ export function Settings({
         <Suspense fallback={<Loading />}>
           {tab === "account" && (
             <AccountPage activeSessions={activeSessions} session={session} />
-          )}
-          {tab === "workspace" && (
-            <WorkspacePage
-              activeOrganization={activeOrganization}
-              session={session}
-            />
           )}
           {/* {tab === "billing" && <BillingPage />} */}
           {tab === "notifications" && <NotificationPage />}

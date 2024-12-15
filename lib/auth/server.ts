@@ -48,14 +48,6 @@ export const auth = betterAuth({
     },
   },
   plugins: [
-    organization({
-      sendInvitationEmail: async (
-        { email, id, inviter, organization, role },
-        request,
-      ) => {
-        console.log(email, id, inviter, organization, role);
-      },
-    }),
     magicLink({
       sendMagicLink: async ({ email, url }, request) => {
         if (process.env.NODE_ENV === "development") {

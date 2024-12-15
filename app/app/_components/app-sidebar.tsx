@@ -86,47 +86,6 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        {/* <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="cursor-pointer"
-              onClick={async () => {
-                setLoggingOut(true);
-                try {
-                  const { error } = await signOut({
-                    fetchOptions: {
-                      onSuccess: () => {
-                        router.push("/login"); // redirect to login page
-                      },
-                    },
-                  });
-                  if (error) {
-                    toast.error(error.message);
-                    return;
-                  }
-                  toast.success("You have been logged out successfully.");
-                } catch (error) {
-                  toast.info("Something went wrong. Please try again.");
-                } finally {
-                  setLoggingOut(false);
-                }
-              }}
-            >
-              {loggingOut ? (
-                <div>
-                  <Loader2 className="animate-spin" />
-                  <span>Log Out</span>
-                </div>
-              ) : (
-                <div>
-                  <LogOut />
-                  Log Out
-                </div>
-              )}
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu> */}
         <UserButton />
       </SidebarFooter>
       <SidebarRail />
