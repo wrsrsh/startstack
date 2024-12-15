@@ -3,9 +3,6 @@ import {
   sessions,
   users,
   verifications,
-  organizations,
-  members,
-  invitations,
 } from "./schema/auth";
 
 export {
@@ -13,7 +10,4 @@ export {
   sessions,
   users,
   verifications,
-  organizations,
-  members,
-  invitations,
 };
