@@ -30,16 +30,17 @@ import {
 } from "@/components/ui/dialog";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { PasswordInput } from "@/components/ui/password-input";
-import { authClient, signOut, useSession } from "@/lib/auth/client";
+import { authClient, signOut } from "@/lib/auth/client";
 import { Session } from "@/types/auth";
 import { Edit, Laptop, Loader2, LogOut, PhoneIcon, X } from "lucide-react";
+import { useCachedSession } from "@/hooks/use-cached-session";
 
 export function AccountPage(props: {
   session: Session | null;
   activeSessions: Session["session"][];
 }) {
   const router = useRouter();
-  const { data } = useSession();
+  const { data } = useCachedSession();
   const session = data || props.session;
   const [isTerminating, setIsTerminating] = useState<string>();
   const [emailVerificationPending, setEmailVerificationPending] =

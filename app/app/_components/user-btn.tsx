@@ -8,7 +8,6 @@ import {
   LogOut,
   Palette,
 } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -31,12 +30,39 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import { useCachedSession } from "@/hooks/use-cached-session";
+
 
 export function UserButton() {
   const { isMobile } = useSidebar();
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending } = useCachedSession();
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setLoggingOut(true);
+    try {
+      // Clear cached session
+      localStorage.removeItem("cache-user-session");
+
+      const { error } = await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/login");
+          },
+        },
+      });
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+      toast.success("You have been logged out successfully.");
+    } catch (error) {
+      toast.info("Something went wrong. Please try again.");
+    } finally {
+      setLoggingOut(false);
+    }
+  };
 
   if (isPending) {
     return (
@@ -142,30 +168,7 @@ export function UserButton() {
               </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              className="cursor-pointer"
-              onClick={async () => {
-                setLoggingOut(true);
-                try {
-                  const { error } = await authClient.signOut({
-                    fetchOptions: {
-                      onSuccess: () => {
-                        router.push("/login");
-                      },
-                    },
-                  });
-                  if (error) {
-                    toast.error(error.message);
-                    return;
-                  }
-                  toast.success("You have been logged out successfully.");
-                } catch (error) {
-                  toast.info("Something went wrong. Please try again.");
-                } finally {
-                  setLoggingOut(false);
-                }
-              }}
-            >
+            <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
               {loggingOut ? (
                 <div className="flex items-center gap-2">
                   <Loader2 className="size-4 animate-spin" />

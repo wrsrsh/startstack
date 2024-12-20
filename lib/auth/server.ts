@@ -11,6 +11,7 @@ import { APP_NAME } from "@/constants";
 export const auth = betterAuth({
   appName: APP_NAME,
   baseURL: env.NEXT_PUBLIC_APP_URL,
+  secret: env.BETTER_AUTH_SECRET,
   trustedOrigins: [env.NEXT_PUBLIC_APP_URL],
   logger: {
     disabled: process.env.NODE_ENV === "production",
