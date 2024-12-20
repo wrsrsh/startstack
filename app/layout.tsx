@@ -27,7 +27,7 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <PostHogProvider>
-          <body className="h-screen bg-orange-50/50 dark:bg-gray-900/10">
+          <body>
             <NuqsAdapter>
               <ThemeProvider
                 attribute={"class"}

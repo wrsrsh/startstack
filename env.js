@@ -10,6 +10,7 @@ const env = createEnv({
     GITHUB_CLIENT_ID: z.string().optional(),
     RESEND_API_KEY: z.string(),
     GITHUB_CLIENT_SECRET: z.string().optional(),
+    NODE_ENV: z.string()
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string(),
@@ -27,6 +28,7 @@ const env = createEnv({
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     NEXT_PUBLIC_POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.POSTHOG_HOST,
+    NODE_ENV: process.env.NODE_ENV,
   },
 });
 
