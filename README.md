@@ -40,7 +40,7 @@
 
 ### Upcoming
 
-- [ ] Payments
+- [ ] Payments (Stripe Integration, Paddle Integration, Dodo Integration)
 - [ ] Admin Dashboard
 - [ ] Improved Design
 
