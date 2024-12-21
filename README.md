@@ -9,7 +9,7 @@
 - Modern UI/UX: Tailwind CSS, dark/light mode, and dashboards.
 - Type-Safe Development: TypeScript, Drizzle ORM, PostgreSQL, Zod validation.
 - Analytics: PostHog integration.
-- Payments (upcoming): Stripe, Paddle, and billing options.
+- Payments (upcoming): Stripe, DodoPayments, and billing options.
 
 ## Tech Stack
 
@@ -41,8 +41,7 @@
 ### Upcoming
 
 - [ ] Payments (Stripe and DodoPayments integration)
-- [ ] Admin Dashboard
-- [ ] Improved Design
+- [ ] Ship v1
 
 ## Contributing
 
