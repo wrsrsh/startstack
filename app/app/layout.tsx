@@ -11,14 +11,14 @@ import {
   SidebarProvider,
   SidebarInset,
 } from "@/components/ui/sidebar";
-import { authValidator } from "@/lib/auth/validate";
+import { protectedRoute } from "@/lib/auth/validate";
 
 export default async function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  await authValidator();
+  await protectedRoute();
   return (
     <SidebarProvider>
       <AppSidebar />

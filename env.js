@@ -18,8 +18,8 @@ const env = createEnv({
     // API keys
     RESEND_API_KEY: z.string(),
 
-    // Runtime environment
-    NODE_ENV: z.string(),
+    // Payments
+    DODO_API_KEY: z.string(),
   },
 
   // Client-side public environment variables
@@ -58,8 +58,8 @@ const env = createEnv({
     NEXT_PUBLIC_POSTHOG_API_KEY: process.env.POSTHOG_API_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.POSTHOG_HOST,
 
-    // Runtime environment
-    NODE_ENV: process.env.NODE_ENV,
+    // Payments
+    DODO_API_KEY: process.env.DODO_API_KEY,
   },
 });
 

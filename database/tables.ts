@@ -3,7 +3,7 @@ import {
   sessions,
   users,
   verifications,
-} from "./schema/auth";
+} from "./schema";
 
 export {
   accounts,

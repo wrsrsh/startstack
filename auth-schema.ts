@@ -1,13 +1,26 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  integer,
+  timestamp,
+  boolean,
+} from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: text("id").primaryKey(),
-  name: text("name").notNull(),
+  name: text("name"),
   email: text("email").notNull().unique(),
   emailVerified: boolean("emailVerified").notNull(),
   image: text("image"),
   createdAt: timestamp("createdAt").notNull(),
   updatedAt: timestamp("updatedAt").notNull(),
+  customerId: text("customerId").unique(),
+  subscriptionId: text("subscriptionId").unique(),
+  street: text("street"),
+  city: text("city"),
+  state: text("state"),
+  country: text("country"),
+  zipcode: integer("zipcode"),
 });
 
 export const sessions = pgTable("sessions", {
