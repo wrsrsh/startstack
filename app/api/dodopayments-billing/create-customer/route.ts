@@ -6,7 +6,7 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
     const res = await auth.api.getSession({
       headers: await headers(),
