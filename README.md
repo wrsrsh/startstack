@@ -41,6 +41,7 @@
 ### Upcoming
 
 - [ ] Payments (Stripe and DodoPayments integration)
+- [ ] Minor fixes here and there to Improve UX & DX
 - [ ] Ship v1
 
 ## Contributing
