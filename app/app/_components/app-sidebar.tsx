@@ -21,10 +21,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { usePathname, useRouter } from "next/navigation";
 import { UserButton } from "./user-btn";
 import Link from "next/link";
+import Image from "next/image";
 
 // Simplified data
 const data = {
@@ -43,6 +45,11 @@ const data = {
       title: "Home",
       url: "/app/home",
       icon: Home,
+    },
+    {
+      title: "Settings",
+      url: "/app/settings",
+      icon: Settings,
     },
   ],
   projects: [
@@ -66,10 +73,30 @@ const data = {
 
 export function AppSidebar() {
   const pathName = usePathname();
+  const { open } = useSidebar();
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="pt-2">
+      <SidebarHeader className="group flex flex-row items-center border-b px-4 py-3 font-mono text-sm font-semibold">
+        {open ? (
+          <Image src="/logo.png" alt="Logo" width={15} height={15} />
+        ) : (
+          <span className="-m-1 p-2 h-6 w-6 border rounded-full flex items-center px-1.5">S</span>
+        )}
+
+        {open && (
+          <>
+            Starstack by
+            <Link
+              className="underline-offset-4 group-hover:underline"
+              href={"https://github.com/asendlabs"}
+            >
+              Asend Labs
+            </Link>
+          </>
+        )}
+      </SidebarHeader>
+      <SidebarContent className="pt-1">
         <SidebarGroup>
           <SidebarMenu>
             {data.navMain.map((item) => (
