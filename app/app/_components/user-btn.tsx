@@ -1,13 +1,4 @@
-import {
-  BadgeCheck,
-  Bell,
-  Building2,
-  ChevronsUpDown,
-  CreditCard,
-  Loader2,
-  LogOut,
-  Palette,
-} from "lucide-react";
+import { ChevronsUpDown, Loader2, LogOut, Settings } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -28,14 +19,14 @@ import {
 import { authClient } from "@/lib/auth/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useCachedSession } from "@/hooks/use-cached-session";
-
 
 export function UserButton() {
   const { isMobile } = useSidebar();
   const { data: session, isPending } = useCachedSession();
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -64,7 +55,13 @@ export function UserButton() {
     }
   };
 
-  if (isPending) {
+  React.useEffect(() => {
+    if (session) {
+      setLoading(false);
+    }
+  }, [session]);
+
+  if (loading || isPending) {
     return (
       <SidebarMenu>
         <SidebarMenuItem>
@@ -138,32 +135,8 @@ export function UserButton() {
             <DropdownMenuGroup>
               <Link href="/app/settings?page=account">
                 <DropdownMenuItem className="cursor-pointer">
-                  <BadgeCheck className="size-4" />
-                  Account
-                </DropdownMenuItem>
-              </Link>
-              <Link href="/app/settings?page=workspace">
-                <DropdownMenuItem className="cursor-pointer">
-                  <Building2 className="size-4" />
-                  Workspace
-                </DropdownMenuItem>
-              </Link>
-              <Link href="/app/settings?page=billing">
-                <DropdownMenuItem className="cursor-pointer">
-                  <CreditCard className="size-4" />
-                  Billing
-                </DropdownMenuItem>
-              </Link>
-              <Link href="/app/settings?page=notifications">
-                <DropdownMenuItem className="cursor-pointer">
-                  <Bell className="size-4" />
-                  Notifications
-                </DropdownMenuItem>
-              </Link>
-              <Link href="/app/settings?page=notifications">
-                <DropdownMenuItem className="cursor-pointer">
-                  <Palette className="size-4" />
-                  Appearance
+                  <Settings className="size-4" />
+                  Settings
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>
