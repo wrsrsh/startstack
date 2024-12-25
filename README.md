@@ -43,6 +43,7 @@
 - [ ] Payments (Stripe and DodoPayments integration)
 - [ ] Minor fixes here and there to Improve UX & DX
 - [ ] Ship v1
+- [ ] Create full setup tutorial
 
 ## Contributing
 
