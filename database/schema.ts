@@ -8,19 +8,12 @@ import {
 
 export const users = pgTable("users", {
   id: text("id").primaryKey(),
-  name: text("name"),
+  name: text("name").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("emailVerified").notNull(),
   image: text("image"),
   createdAt: timestamp("createdAt").notNull(),
   updatedAt: timestamp("updatedAt").notNull(),
-  customerId: text("customerId").unique(),
-  subscriptionId: text("subscriptionId").unique(),
-  street: text("street"),
-  city: text("city"),
-  state: text("state"),
-  country: text("country"),
-  zipcode: integer("zipcode"),
 });
 
 export const sessions = pgTable("sessions", {

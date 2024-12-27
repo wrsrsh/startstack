@@ -23,52 +23,6 @@ export const auth = betterAuth({
       maxAge: 5 * 60,
     },
   },
-  user: {
-    additionalFields: {
-      customerId: {
-        type: "string",
-        unique: true,
-        required: false,
-        fieldName: "customerId",
-      },
-      subscriptionId: {
-        type: "string",
-        unique: true,
-        required: false,
-        fieldName: "subscriptionId",
-      },
-      street: {
-        type: "string",
-        required: false,
-        fieldName: "street",
-      },
-      city: {
-        type: "string",
-        required: false,
-        fieldName: "city",
-      },
-      state: {
-        type: "string",
-        required: false,
-        fieldName: "state",
-      },
-      country: {
-        type: "string",
-        required: false,
-        fieldName: "country",
-      },
-      zipcode: {
-        type: "number",
-        required: false,
-        fieldName: "zipcode",
-      },
-      name: {
-        type: "string",
-        required: false,
-        fieldName: "name",
-      },
-    },
-  },
   socialProviders: {
     google: {
       clientId: env.GOOGLE_CLIENT_ID as string,
