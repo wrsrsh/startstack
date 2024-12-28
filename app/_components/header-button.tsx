@@ -1,8 +1,5 @@
-"use client";
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { RainbowButton } from "@/components/ui/rainbow-button";
+import Link from "next/link";
 
 interface HeaderButtonProps {
   href: string;
@@ -11,16 +8,14 @@ interface HeaderButtonProps {
 }
 
 export function HeaderButton({ href, label, icon }: HeaderButtonProps) {
-  const router = useRouter();
-
   return (
-    <Button
-      variant="outline"
-      className="m-0 flex h-9 items-center gap-2 !py-0 px-3"
-      onClick={() => router.push(href)}
+    <Link
+      className="m-0 inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-full border !py-0 px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+      href={href}
+      prefetch={true}
     >
       {icon}
       {label}
-    </Button>
+    </Link>
   );
 }

@@ -10,6 +10,7 @@ export default function NotFound() {
       <Link
         href="/app/home"
         className="flex items-center gap-2 rounded-lg border border-input px-3 py-2 hover:bg-muted"
+        prefetch={true}
       >
         <ArrowLeft className="size-5" />
         Return Home

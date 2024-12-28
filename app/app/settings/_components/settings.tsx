@@ -51,14 +51,12 @@ export function Settings({
         ))}
       </nav>
       <main className="flex-1">
-        <Suspense fallback={<Loading />}>
-          {tab === "account" && (
-            <AccountPage activeSessions={activeSessions} session={session} />
-          )}
-          {/* {tab === "billing" && <BillingPage />} */}
-          {tab === "notifications" && <NotificationPage />}
-          {tab === "appearance" && <AppearancePage />}
-        </Suspense>
+        {tab === "account" && (
+          <AccountPage activeSessions={activeSessions} session={session} />
+        )}
+        {/* {tab === "billing" && <BillingPage />} */}
+        {tab === "notifications" && <NotificationPage />}
+        {tab === "appearance" && <AppearancePage />}
       </main>
     </section>
   );
