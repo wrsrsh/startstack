@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function HomeRoute() {
   return (
-    <section className="h-screen px-4 py-2">
+    <section className="px-4 py-2">
       <PageTitle selfLabel="Home" />
       <Suspense fallback={<Loading />}>
         <div className="px-4">

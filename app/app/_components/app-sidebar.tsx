@@ -27,6 +27,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { UserButton } from "./user-btn";
 import Link from "next/link";
 import Image from "next/image";
+import { Logo } from "@/components/logo";
+import { cn } from "@/lib/utils";
 
 const navigation = [
   {
@@ -46,29 +48,17 @@ export function AppSidebar() {
   const { open } = useSidebar();
 
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader className="flex flex-row items-center border-b px-4 py-3 font-mono text-sm font-semibold">
-        {open ? (
-          <Image src="/logo.png" alt="Logo" width={15} height={15} />
-        ) : (
-          <span className="-m-1 flex h-6 w-6 items-center rounded-full border p-2 px-1.5">
-            S
-          </span>
+    <Sidebar collapsible="icon" variant="inset">
+      <SidebarHeader
+        className={cn(
+          "flex flex-row items-center py-3 text-sm font-semibold",
+          open ? "px-4" : "justify-center",
         )}
-
-        {open && (
-          <>
-            Starstack by
-            <Link
-              className="underline-offset-4 hover:underline"
-              href={"https://github.com/asendlabs"}
-            >
-              Asend Labs
-            </Link>
-          </>
-        )}
+      >
+        <Logo className="m-0 size-5 p-1" />
+        {open && <>Starstack by Asend Labs</>}
       </SidebarHeader>
-      <SidebarContent className="pt-1">
+      <SidebarContent className="">
         <SidebarGroup>
           <SidebarMenu>
             {navigation.map((item) => (
