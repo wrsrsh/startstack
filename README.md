@@ -2,6 +2,8 @@
 
 ![Screenshot](public/images/landing_ss.png)
 
+NOTE: THE V1 WILL BE LAUNCHED IN END OF Q1 AS THE OP HAS PAUSED WORK ON IT.
+
 ## Features
 
 - Magic Link Auth: login with Better-Auth & Resend, plus GitHub OAuth.
