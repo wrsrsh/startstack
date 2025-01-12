@@ -10,6 +10,7 @@ import {
   Settings,
   Loader2,
   Loader,
+  LucideIcon,
 } from "lucide-react";
 
 import {
@@ -32,7 +33,7 @@ import { cn } from "@/lib/utils";
 const navigation: {
   title: string;
   url: string;
-  icon: any;
+  icon: LucideIcon;
 }[] = [
   {
     title: "Home",
