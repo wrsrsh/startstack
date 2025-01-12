@@ -9,6 +9,7 @@ import {
   Coffee,
   Settings,
   Loader2,
+  Loader,
 } from "lucide-react";
 
 import {
@@ -25,12 +26,14 @@ import {
 } from "@/components/ui/sidebar";
 import { usePathname, useRouter } from "next/navigation";
 import { UserButton } from "./user-btn";
-import Link from "next/link";
-import Image from "next/image";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 
-const navigation = [
+const navigation: {
+  title: string;
+  url: string;
+  icon: any;
+}[] = [
   {
     title: "Home",
     url: "/app/home",
@@ -44,8 +47,60 @@ const navigation = [
 ];
 
 export function AppSidebar() {
-  const pathName = usePathname();
-  const { open } = useSidebar();
+  const pathname = usePathname();
+  const router = useRouter();
+  const { open, toggleSidebar } = useSidebar();
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [loadedPathnames, setLoadedPathnames] = React.useState<string[]>([]);
+  const [loadingPathname, setLoadingPathname] = React.useState<string>("");
+
+  // Create a ref to track if the component is mounted
+  const isMounted = React.useRef(false);
+
+  // Collect all routes that need to be prefetched
+  const allRoutes = React.useMemo(() => {
+    const routes: string[] = [];
+    navigation.forEach((item) => {
+      routes.push(item.url);
+    });
+    return routes;
+  }, []);
+
+  const prefetchAllRoutes = React.useCallback(() => {
+    // Small delay to ensure we don't interfere with initial page load
+    setTimeout(() => {
+      allRoutes.forEach((route) => {
+        if (route !== pathname) {
+          router.prefetch(route);
+        }
+      });
+      setLoading(false);
+      if (loadedPathnames.length === 0) {
+        setLoadedPathnames([pathname]);
+      }
+    }, 100);
+  }, [router, allRoutes, pathname, loadedPathnames]);
+
+  // Handle initial route prefetching
+  React.useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+
+      // Wait for the page to be fully loaded
+      if (typeof window !== "undefined") {
+        if (document.readyState === "complete") {
+          prefetchAllRoutes();
+        } else {
+          window.addEventListener("load", prefetchAllRoutes);
+          return () => window.removeEventListener("load", prefetchAllRoutes);
+        }
+      }
+    }
+  }, [prefetchAllRoutes]);
+
+  const handleNavigation = (url: string) => () => {
+    router.replace(url);
+  };
 
   return (
     <Sidebar collapsible="icon" variant="inset">
@@ -63,12 +118,24 @@ export function AppSidebar() {
           <SidebarMenu>
             {navigation.map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild isActive={item.url === pathName}>
-                  <Link href={item.url} prefetch={true}>
-                    {item.icon && <item.icon />}
-                    <span>{item.title}</span>
-                  </Link>
-                </SidebarMenuButton>
+                <div
+                  onClick={handleNavigation(item.url)}
+                  onDoubleClick={() => {
+                    handleNavigation(item.url)();
+                    toggleSidebar();
+                  }}
+                >
+                  <SidebarMenuButton isActive={item.url === pathname}>
+                    <div className="flex items-center gap-2">
+                      {loading && loadingPathname === item.url ? (
+                        <Loader className="size-4 animate-spin" />
+                      ) : (
+                        <item.icon className="size-4" />
+                      )}
+                      <span>{item.title}</span>
+                    </div>
+                  </SidebarMenuButton>
+                </div>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
@@ -81,3 +148,5 @@ export function AppSidebar() {
     </Sidebar>
   );
 }
+
+export default AppSidebar;

@@ -20,7 +20,6 @@ export const auth = betterAuth({
     expiresIn: 60 * 60 * 24 * 30, // 30 days
     cookieCache: {
       enabled: false,
-      maxAge: 5 * 60,
     },
   },
   socialProviders: {
