@@ -1,6 +1,9 @@
+/* Rounded Pill for Text:
+Wrapped the text "easiest way" in a span with an orange rounded pill background and a slight rotation (rotate-[5deg]), adding visual interest and emphasis to that specific phrase.
+ */
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Circle, GithubIcon } from "lucide-react";
+import { GithubIcon } from "lucide-react";
 import Link from "next/link";
 
 export function Hero() {
@@ -18,8 +21,14 @@ export function Hero() {
             </p>
           </Badge>
         </Link>
+
+        {/* Heading with Orange Pill */}
         <h1 className="max-w-[41.5rem] break-words text-center text-4xl font-bold text-black dark:text-white md:text-5xl">
-          The easiest way to get started with your next saas project.
+          The{" "}
+          <span className="relative inline-block bg-orange-600 px-2 py-1 rounded-full text-white transform rotate-[5deg]">
+            easiest way
+          </span>{" "}
+          to get started with your next saas project.
         </h1>
       </div>
     </section>
