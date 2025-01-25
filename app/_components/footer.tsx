@@ -1,17 +1,3 @@
-/* Key Changes Made-by VocanecsA
-Destructured Props:
-Destructured props directly in the function parameters for cleaner syntax.
-Use of React.ElementType:
-Used React.ElementType for the icon prop type in FooterSocialLink, which is more flexible and allows any valid React component.
-Accessibility Improvements:
-Added aria-label attributes to social links for better accessibility.
-Security Best Practices:
-Added rel="noopener noreferrer" to external links to improve security.
-Commented Code:
-Kept the commented-out footer links code clean and ready for future use without cluttering the main render logic.
-Consistent Use of Fragments:
-Used shorthand fragments (<>) only where necessary; in this case, it wasn't needed since we have a single parent element. */
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

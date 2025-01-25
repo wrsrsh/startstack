@@ -9,6 +9,7 @@ import { CustomToaster } from "@/components/custom-toaster";
 import { createMetadata } from "@/lib/metadata";
 import { APP_NAME } from "@/constants";
 import { PostHogProvider } from "@/providers/posthog-provider";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata = createMetadata({
   title: {
@@ -35,6 +36,10 @@ export default function RootLayout({
                 enableSystem
                 disableTransitionOnChange
               >
+                <NextTopLoader
+                  color="hsl(var(--primary))"
+                  showSpinner={false}
+                />
                 {children}
                 <ModeToggle
                   className="absolute right-4 top-4"
