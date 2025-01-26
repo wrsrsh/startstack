@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { GithubIcon, Linkedin, LucideIcon, Twitter, X } from "lucide-react";
+import { GithubIcon, Twitter } from "lucide-react";
 
 interface FooterLinkProps {
   href: string;
@@ -10,40 +10,45 @@ interface FooterLinkProps {
 
 interface FooterSocialLinkProps {
   href: string;
-  icon: LucideIcon;
+  icon: React.ElementType; // Use React.ElementType for better typing
 }
 
-const FooterLink = (props: FooterLinkProps) => {
-  return (
-    <Link
-      className="cursor-pointer text-muted-foreground underline-offset-[3px] hover:text-primary hover:underline"
-      href={props.href}
-    >
-      {props.title}
-    </Link>
-  );
-};
+const FooterLink = ({ href, title }: FooterLinkProps) => (
+  <Link
+    className="cursor-pointer text-muted-foreground underline-offset-[3px] hover:text-primary hover:underline"
+    href={href}
+  >
+    {title}
+  </Link>
+);
 
-const FooterSocialLink = (props: FooterSocialLinkProps) => {
-  return (
-    <Link
-      href={props.href}
-      target="_blank"
-      className="flex items-center gap-2 text-muted-foreground hover:text-primary"
-    >
-      <props.icon className="size-[17px]" />
-    </Link>
-  );
-};
+const FooterSocialLink = ({ href, icon: Icon }: FooterSocialLinkProps) => (
+  <Link
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer" // Security best practice
+    className="flex items-center gap-2 text-muted-foreground hover:text-primary"
+    aria-label={`Visit our ${
+      typeof Icon === "function" && Icon.displayName ? Icon.displayName : "social media"
+    } page`} // Safely handle displayName
+  >
+    <Icon className="size-[17px]" />
+  </Link>
+);
+
 
 const footerSocialLinks: FooterSocialLinkProps[] = [
   {
     href: "https://github.com/asendlabs/startstack",
     icon: GithubIcon,
   },
-  { href: "https://x.com/warisareshi", icon: Twitter },
+  {
+    href: "https://twitter.com/warisareshi",
+    icon: Twitter,
+  },
 ];
 
+// Uncomment when ready to use footer links
 // const footerLinks: FooterLinkProps[] = [
 //   {
 //     href: "/policies/privacy",
@@ -61,9 +66,10 @@ const footerSocialLinks: FooterSocialLinkProps[] = [
 
 export function Footer() {
   return (
-    <section className="md:px-30 flex w-screen flex-col items-center justify-between border-t border-border px-10 py-5 text-xs sm:px-20 md:flex-row md:text-sm lg:px-40 mt-auto">
+    <footer className="md:px-30 flex w-screen flex-col items-center justify-between border-t border-border px-10 py-5 text-xs sm:px-20 md:flex-row md:text-sm lg:px-40 mt-auto">
       <div className="flex flex-col items-center gap-3 md:flex-row">
         <span className="mr-3">© Startstack by Asend Labs | 2024</span>
+        {/* Uncomment when ready to use footer links */}
         {/* {footerLinks.map((link, index) => (
           <FooterLink key={index} {...link} />
         ))} */}
@@ -73,6 +79,6 @@ export function Footer() {
           <FooterSocialLink key={index} {...link} />
         ))}
       </div>
-    </section>
+    </footer>
   );
 }

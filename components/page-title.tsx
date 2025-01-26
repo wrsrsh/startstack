@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -22,32 +23,36 @@ export function PageTitle({
   selfLabel,
   triggerDisabled = false,
 }: PageTitleProps) {
+  // Memoize breadcrumb rendering logic to avoid unnecessary recalculations
+  const breadcrumbs = useMemo(() => (
+    <Breadcrumb>
+      <BreadcrumbList>
+        {parentLabel && (
+          <>
+            <BreadcrumbItem className="hidden md:block">
+              <BreadcrumbLink href={parentUrl}>{parentLabel}</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator className="hidden md:block" />
+          </>
+        )}
+        <BreadcrumbItem>
+          <BreadcrumbPage>{selfLabel}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  ), [parentLabel, parentUrl, selfLabel]);
+
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
       <div className="flex items-center gap-1 px-3">
+        {/* Only render SidebarTrigger and Separator if not disabled */}
         {!triggerDisabled && (
           <>
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-1 h-4" />
           </>
         )}
-        <Breadcrumb>
-          <BreadcrumbList>
-            {parentLabel && (
-              <>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href={parentUrl}>
-                    {parentLabel}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-              </>
-            )}
-            <BreadcrumbItem>
-              <BreadcrumbPage>{selfLabel}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        {breadcrumbs}
       </div>
     </header>
   );
