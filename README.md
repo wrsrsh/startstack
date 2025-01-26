@@ -1,4 +1,4 @@
-# A free full-stack production-ready SaaS starter kit.
+# A Free Full-Stack production-ready SaaS starter kit.
 
 ![Screenshot](public/images/landing_ss.png)
 
