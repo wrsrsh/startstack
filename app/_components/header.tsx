@@ -35,7 +35,7 @@ export function Header() {
   const {data: session} = useSession();
 
   return (
-    <section className="relative flex w-screen items-center justify-between border-b border-border px-4 py-3.5 sm:px-10 md:px-32 lg:px-40">
+    <section className="relative flex w-screen items-center justify-between border-b border-border px-4 py-4 sm:px-10 md:px-32 lg:px-40">
       {/* Hamburger Menu Icon */}
       <div className="sm:hidden">
         <button onClick={toggleMenu} className="flex items-center">
@@ -49,7 +49,7 @@ export function Header() {
 
       {/* Logo */}
       <Link
-        className="flex items-center gap-2 text-lg font-medium sm:text-xl"
+        className="flex items-center gap-2 text-lg font-medium sm:text-lg"
         href={"/"}
       >
         Startstack
