@@ -1,3 +1,4 @@
+"use client";
 import { ChevronsUpDown, Loader2, LogOut, Settings } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,7 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth/client";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useCachedSession } from "@/hooks/use-cached-session";

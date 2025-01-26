@@ -13,6 +13,7 @@ import {
 import { sendEmail } from "@/lib/email";
 import { toast } from "sonner";
 
+
 const MagicLinkEmailBody = ({ email, url }: { email: string; url: string }) => {
   return (
     <Html>

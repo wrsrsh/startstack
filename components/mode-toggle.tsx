@@ -12,6 +12,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { usePathname } from "next/navigation";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 export function ModeToggle({
   className,
@@ -21,6 +23,7 @@ export function ModeToggle({
   caller: "layout" | "page";
 }) {
   const { setTheme } = useTheme();
+  const isMobile = useIsMobile();
   const pathName = usePathname();
   const disabledPathnamesStart: string[] = ["/app/settings"];
 
@@ -37,10 +40,12 @@ export function ModeToggle({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={className}>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
+        <Button variant="outline" size={isMobile ? "default" : "icon"}>
+          <Sun className="h-[1.2rem] w-[1.2rem] visible dark:hidden" />
+          <Moon className="h-[1.2rem] w-[1.2rem] hidden dark:block text-white" />
+          <span className={cn(
+            !isMobile && "sr-only",
+          )}>Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

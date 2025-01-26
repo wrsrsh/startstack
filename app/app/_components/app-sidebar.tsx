@@ -25,7 +25,8 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useRouter } from "@/hooks/use-router";
 import { UserButton } from "./user-btn";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
@@ -67,7 +68,7 @@ export function AppSidebar() {
     return routes;
   }, []);
 
-  const prefetchAllRoutes = React.useCallback(() => {
+  const prefetchAllRoutes = () => {
     // Small delay to ensure we don't interfere with initial page load
     setTimeout(() => {
       allRoutes.forEach((route) => {
@@ -79,8 +80,8 @@ export function AppSidebar() {
       if (loadedPathnames.length === 0) {
         setLoadedPathnames([pathname]);
       }
-    }, 100);
-  }, [router, allRoutes, pathname, loadedPathnames]);
+    }, 200);
+  };
 
   // Handle initial route prefetching
   React.useEffect(() => {
