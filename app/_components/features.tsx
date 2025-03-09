@@ -13,7 +13,7 @@ const features: Feature[] = [
       "Secure authentication system with magic link functionality and GitHub OAuth integration. Includes email delivery via Resend and session management.",
   },
   {
-    title: "Next.js 14 + TypeScript",
+    title: "Next.js 15 + TypeScript",
     description:
       "Modern React framework with App Router and Server Components. Full TypeScript support with strict type checking and API route handlers.",
   },

@@ -1,10 +1,12 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, TriangleAlert, Frown } from "lucide-react";
 import { Link } from "next-view-transitions";
 
 export default function NotFound() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-3">
-      <h2 className="text-4xl font-bold">
+      <TriangleAlert className="size-12" />
+      <h2 className="text-4xl font-bold flex items-center gap-2">
+        <Frown className="size-12 text-orange-500" />
         Uh, oh. We couldn't find that page.
       </h2>
       <Link

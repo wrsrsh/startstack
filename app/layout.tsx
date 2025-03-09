@@ -10,6 +10,7 @@ import { createMetadata } from "@/lib/metadata";
 import { APP_NAME } from "@/constants";
 import { PostHogProvider } from "@/providers/posthog-provider";
 import NextTopLoader from "nextjs-toploader";
+import { CookieConsent } from "@/components/cookie-consent";
 
 export const metadata = createMetadata({
   title: {
@@ -46,6 +47,7 @@ export default function RootLayout({
                   caller="layout"
                 />
                 <CustomToaster />
+                <CookieConsent />
               </ThemeProvider>
             </NuqsAdapter>
           </body>
