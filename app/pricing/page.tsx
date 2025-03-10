@@ -1,16 +1,14 @@
-'use client';
-import React, { useState, Suspense } from "react";
-import dynamic from "next/dynamic";
+"use client";
+
+import React from "react";
 import { PageTitle } from "@/components/page-title";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import Loading from "@/app/loading";
+import Image from 'next/image';
+import { Header } from "@/app/_components/header";
+import { Footer } from "@/app/_components/footer";
+import { useRouter } from 'next/navigation'; // Import useRouter
 
-// Dynamically import Header
-const Header = dynamic(() => import("@/app/_components/header").then((mod) => mod.Header));
-// Optionally include Footer if needed
-const Footer = dynamic(() => import("@/app/_components/footer").then((mod) => mod.Footer));
 
 // Define your pricing plans
 const pricingPlans = [
@@ -38,13 +36,13 @@ const pricingPlans = [
       "Feature 5",
       "Feature 6",
     ],
-    productId: "prod_pro456", // Replace with your actual DODO product ID
+    productId: "pdt_a1EG4eSKFx8iPO1t53SPM", // Replace with your actual DODO product ID
     isPopular: true,
   },
   {
     title: "Enterprise",
     price: "$49.99",
-    frequency: "month",
+frequency: "month",
     description: "Advanced features for larger organizations",
     features: [
       "All Pro features",
@@ -58,58 +56,41 @@ const pricingPlans = [
   },
 ];
 
-export default function PricingPage() {
-  const [loading, setLoading] = useState<string | null>(null);
-  const router = useRouter();
+// New Client Component for handling subscriptions
+// New Client Component for handling subscriptions
+function SubscriptionHandler({ productId, planName }: { productId: string; planName: string }) {
   const { toast } = useToast();
+  const router = useRouter(); // Use useRouter hook
 
-  const handleSubscription = async (productId: string, planName: string) => {
+  const handleSubscription = () => {
     try {
-      setLoading(productId);
-      
-      // Create a checkout session with DODO
-      const session = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          productId,
-          planName,
-          successUrl: `${window.location.origin}/dashboard?success=true`,
-          cancelUrl: `${window.location.origin}/pricing?canceled=true`,
-        }),
-      });
-      
-      const { checkoutUrl } = await session.json();
-      
-      if (checkoutUrl) {
-        // Redirect to DODO checkout
-        window.location.href = checkoutUrl;
-      } else {
-        throw new Error('Failed to create checkout session');
-      }
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
+      // 1.  Redirect to Dodo Payments checkout page.
+      const dodoCheckoutURL = `https://www.checkout.dodopayments.com/buy/${productId}`;
+      window.location.href = dodoCheckoutURL;
+    } catch (error: any) {
+      console.error('Error creating subscription:', error);
       toast({
-        title: "Error",
-        description: "Failed to create checkout session. Please try again.",
+        title: "Subscription Error",
+        description: error.message || "Failed to create subscription. Please try again.",
         variant: "destructive",
       });
-    } finally {
-      setLoading(null);
     }
   };
 
   return (
+    <Button className="w-full" onClick={handleSubscription}>
+      {`Subscribe to ${planName}`}
+    </Button>
+  );
+}
+
+
+export default function PricingPage() {
+  return (
     <section className="flex min-h-screen flex-col">
-      <Suspense fallback={<div>Loading...</div>}>
-        <Header />
-      </Suspense>
-      
+      <Header />
+
       <div className="px-4 py-8 flex-grow">
-        {/* <PageTitle selfLabel="Pricing" /> */}
-        
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold tracking-tight">
@@ -119,21 +100,19 @@ export default function PricingPage() {
               Choose the plan that works best for your needs
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {pricingPlans.map((plan) => (
-              <div 
+              <div
                 key={plan.productId}
-                className={`relative rounded-lg border p-6 shadow-sm ${
-                  plan.isPopular ? 'border-primary ring-2 ring-primary' : 'border-border'
-                }`}
+                className={`relative rounded-lg border p-6 shadow-sm flex flex-col ${plan.isPopular ? 'border-primary ring-2 ring-primary' : 'border-border'}`}
               >
                 {plan.isPopular && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary px-3 py-1 rounded-full text-xs font-medium text-primary-foreground">
                     Most Popular
                   </div>
                 )}
-                
+
                 <div className="mb-4">
                   <h3 className="text-lg font-semibold">{plan.title}</h3>
                   <div className="mt-2 flex items-baseline">
@@ -142,7 +121,7 @@ export default function PricingPage() {
                   </div>
                   <p className="mt-2 text-sm text-gray-500">{plan.description}</p>
                 </div>
-                
+
                 <ul className="mt-6 space-y-3">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
@@ -163,29 +142,13 @@ export default function PricingPage() {
                     </li>
                   ))}
                 </ul>
-                
-                <Button
-                  className="mt-8 w-full"
-                  variant={plan.isPopular ? "default" : "outline"}
-                  onClick={() => handleSubscription(plan.productId, plan.title)}
-                  disabled={loading === plan.productId}
-                >
-                  {loading === plan.productId ? (
-                    <div className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Processing...
-                    </div>
-                  ) : (
-                    `Subscribe to ${plan.title}`
-                  )}
-                </Button>
+                 <div className="mt-auto w-full">
+                <SubscriptionHandler productId={plan.productId} planName={plan.title} />
+                </div>
               </div>
             ))}
           </div>
-          
+
           <div className="mt-12 text-center">
             <p className="text-sm text-gray-500">
               Have questions about our pricing? <a href="/contact" className="text-primary font-medium hover:underline">Contact us</a>
@@ -193,10 +156,17 @@ export default function PricingPage() {
           </div>
         </div>
       </div>
-      
-      <Suspense fallback={<div>Loading...</div>}>
-        <Footer />
-      </Suspense>
+
+      <div className="flex justify-center">
+        <Image
+          src="/dodo_payments_banner.jpg"
+          alt="Dodo Payments Banner"
+          width={585}
+          height={121}
+        />
+      </div>
+
+      <Footer />
     </section>
   );
 }

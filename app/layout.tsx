@@ -42,10 +42,10 @@ export default function RootLayout({
                   showSpinner={false}
                 />
                 {children}
-                <ModeToggle
+                {/* <ModeToggle
                   className="absolute right-4 top-4"
                   caller="layout"
-                />
+                /> */}
                 <CustomToaster />
                 <CookieConsent />
               </ThemeProvider>
