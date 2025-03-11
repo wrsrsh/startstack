@@ -1,4 +1,4 @@
-"use client"; // Ensure this is a client component
+"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -12,11 +12,42 @@ import {
   Star as FeaturesIcon,
   DollarSign as PricingIcon,
   Info as AboutIcon,
-  UserCircle, // Replace AboutIcon with Info
-} from "lucide-react"; // Import valid icons
+  UserCircle,
+} from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSession } from "@/lib/auth/client";
+
+// Menu data structure
+interface MenuItem {
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+}
+
+// Example menu data items with icons
+const menuItems: MenuItem[] = [
+  {
+    label: "Home",
+    href: "/",
+    icon: <HomeIcon className="size-4" />,
+  },
+  {
+    label: "Features",
+    href: "/features",
+    icon: <FeaturesIcon className="size-4" />,
+  },
+  {
+    label: "Pricing",
+    href: "/pricing",
+    icon: <PricingIcon className="size-4" />,
+  },
+  {
+    label: "About",
+    href: "/about",
+    icon: <AboutIcon className="size-4" />,
+  },
+];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,7 +63,7 @@ export function Header() {
     }
   }, [isMenuOpen, isMobile]);
 
-  const {data: session} = useSession();
+  const { data: session } = useSession();
 
   return (
     <section className="relative flex w-screen items-center justify-between border-b border-border px-4 py-4 sm:px-10 md:px-32 lg:px-40">
@@ -52,11 +83,30 @@ export function Header() {
         className="flex items-center gap-2 text-lg font-medium sm:text-lg"
         href={"/"}
       >
+        <img src="/orange-logo.png" alt="Orange Logo" className="h-8 w-8" />
         Startstack
       </Link>
 
+      {/* Desktop Navigation */}
+      <div className="hidden items-center gap-6 sm:flex">
+        {menuItems.map((item) => (
+          <HeaderButton
+            key={item.label}
+            href={item.href}
+            label={item.label}
+            icon={item.icon}
+          />
+        ))}
+      </div>
+
       {/* Desktop Buttons */}
       <div className="hidden items-center gap-2 sm:flex">
+        <HeaderButton
+          href="https://github.com/asendlabs/startstack"
+          label="GitHub"
+          icon={<GithubIcon className="size-4" />}
+        />
+        
         <HeaderButton
           href={session?.user && session?.session ? "/app/home" : "/login"}
           label={
@@ -79,13 +129,18 @@ export function Header() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-x-0 top-14 z-50 flex flex-col space-y-4 bg-white p-6 text-black shadow-lg dark:bg-primary dark:text-white">
-          {/* Close Button
-          <button onClick={toggleMenu} className="self-end">
-            <XIcon className="w-6 h-6" />
-          </button> */}
-
-          {/* Links */}
+          {/* Menu Items */}
           <nav className="flex flex-col space-y-4">
+            {/* Main Navigation Items */}
+            {menuItems.map((item) => (
+              <HeaderButton
+                key={item.label}
+                href={item.href}
+                label={item.label}
+                icon={item.icon}
+              />
+            ))}
+            
             {/* GitHub Link */}
             <HeaderButton
               href="https://github.com/asendlabs/startstack"
