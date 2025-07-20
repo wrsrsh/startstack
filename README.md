@@ -1,4 +1,4 @@
-## ⚠️ warning  
+### ⚠️ warning  
 > **this project has been paused, is no longer active, and will not be maintained  in the future.**  
 > **do not use in production. no updates or support will be provided.**
 
@@ -7,11 +7,11 @@
 > for any webapps i recommend using [vite](https://vitejs.dev) + [react](https://react.dev) with [tanstack router](https://tanstack.com/router) and a [convex](https://convex.dev) backend, or [hono](https://hono.dev) with the [hono rpc client](https://hono.dev/docs/guides/rpc).
 
 
-# a full-stack production-ready saas starter kit
+## a full-stack production-ready saas starter kit
 
 ![screenshot](public/images/landing_ss.png)
 
-## features
+### features
 
 - magic link auth: login with better-auth & resend, plus github oauth  
 - protected access: protected routes and middleware  
@@ -20,7 +20,7 @@
 - analytics: posthog integration  
 - payments (upcoming): stripe, dodopayments, and billing options  
 
-## tech stack
+### tech stack
 
 - framework: next.js  
 - authentication: better-auth  
@@ -31,9 +31,9 @@
 - analytics: posthog  
 - validation: zod  
 
-## roadmap
+### roadmap
 
-### completed
+#### completed
 
 - [x] magic link authentication with better-auth and resend  
 - [x] github oauth integration  
@@ -47,14 +47,14 @@
 - [x] posthog analytics  
 - [x] landing page  
 
-### upcoming (cancelled)
+#### upcoming (cancelled)
 
 - [ ] payments (stripe and dodopayments integration)  
 - [ ] minor fixes here and there to improve ux & dx  
 - [ ] ship v1  
 - [ ] create full setup tutorial  
 
-## contributing
+### contributing
 
 1. fork the repository  
 2. create a feature branch (`git checkout -b feature/yourfeature`)  
