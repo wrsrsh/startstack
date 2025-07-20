@@ -1,8 +1,9 @@
-# A Free Full-Stack production-ready SaaS starter kit.
+# ⚠️ Warning
+> This project has been paused and is no longer active and will not be in the future as well.
+
+# A Full-Stack production-ready SaaS starter kit.
 
 ![Screenshot](public/images/landing_ss.png)
-
-NOTE: THE V1 WILL BE LAUNCHED IN END OF Q1 AS THE OP HAS PAUSED WORK ON IT.
 
 ## Features
 
