@@ -4,7 +4,7 @@
 
 > i have since moved away from [next.js](https://nextjs.org) as the base building block for my applications and even for my company.  
 > for marketing/public websites where seo and ssr is crucial, i recommend [astro](https://astro.build) with some sort of [cms](https://jamstack.org/headless-cms/).  
-> for any webapps i recommend using [vite](https://vitejs.dev) + [react](https://react.dev) with [tanstack router](https://tanstack.com/router) and a [convex](https://convex.dev) backend, or [hono](https://hono.dev) with the [hono rpc client](https://github.com/honojs/rpc).
+> for any webapps i recommend using [vite](https://vitejs.dev) + [react](https://react.dev) with [tanstack router](https://tanstack.com/router) and a [convex](https://convex.dev) backend, or [hono](https://hono.dev) with the [hono rpc client](https://hono.dev/docs/guides/rpc).
 
 
 # a full-stack production-ready saas starter kit
